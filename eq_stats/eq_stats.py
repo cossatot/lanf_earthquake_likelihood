@@ -1,6 +1,7 @@
 import numpy as np
+import pandas as pd
 
-def F(M, Mmin=2.5, Mc=7.64, B=0.65):
+def F(M=None, Mmin=2.5, Mc=7.64, B=0.65):
     """
     F(M) is the tapered Gutenberg-Richter distribution
     given by Shen et al., 2007 SRL with values for constants
@@ -12,7 +13,11 @@ def F(M, Mmin=2.5, Mc=7.64, B=0.65):
     return term1 * term2
 
 
-def lognormal(x, mu = -0.5, sigma=0.5):
+def _lognormal(x, mu = -0.5, sigma=0.5):
+    """
+    Calculates a lognormal value given location param mu
+    and scale param sigma, for each point in x
+    """
     term1 = 1 / sigma * x * np.sqrt(2 * np.pi)
     term2 = np.exp(-(np.log(x) - mu)**2 / (2 * sigma**2) )
     
@@ -32,7 +37,7 @@ def F_char(M, Mmin=2.5, Mc=7.64, B=0.65, char_M=6.25,
     M_shift = M - char_M + 1
     M_shift[M_shift < 0] = 0
     
-    F_lognormal = lognormal( (M_shift) )
+    F_lognormal = _lognormal( (M_shift) )
     norm_constant = np.max(F_lognormal) / F_char_amp
     
     F_lognormal *= 1/ norm_constant
@@ -87,7 +92,68 @@ def find_nearest_dict_val(dict_, vals):
     return nearest_vals
 
 
-def Mo_from_M(M, C=6):
+def sample_from_pdf(vals, counts, num):
+    inv_ecdf_d = get_inverse_ecdf_dict(vals, counts)
+    rand_samp = np.random.rand(num)
+    pdf_samp = find_nearest_dict_val(inv_ecdf_d, rand_samp)
+    
+    return pdf_samp
+
+
+def dip_rand_samp(dip, err, num, threshold=30, output='degrees'):
+    """
+    Creates a uniform random sample between min(dip+err, threshold)
+    and returns both the sample and the fraction (decimal) of the total
+    dip range that is below the threshold (this fraction should be multiplied
+    by any final probabilities of observing an earthquake on a dip below the
+    threshold value).
+
+    Assumes input dips are in degrees (it's dip...) but output can be in
+    radians, if desired.
+
+    Returns: tuple [samp, fraction]
+    """
+    if threshold != None:
+
+        dip_min = dip - err
+        dip_max = min((dip + err), threshold)
+    
+        dip_samp = np.random.rand(num) * (dip_max - dip_min) + dip_min
+
+        frac = (dip_max-dip_min) / float(2 * err)
+
+    else:
+        dip_min = dip - err
+        dip_max = dip + err
+        
+        dip_samp = np.random.rand(num) * (dip_max - dip_min) + dip_min
+
+        frac = 1
+
+    if output == 'radians':
+        dip_samp = np.radian(dip_samp)
+
+    return [dip_samp, frac]
+
+
+def Ddot_rand_samp(Ddot, err, num, rand_type = 'uniform'):
+    """
+    Creates a random sample of fault slip rates (Ddot, where 
+    D := fault slip).  Can either be uniform between (Ddot-err, Ddot+err)
+    or Gaussian, with mu=Ddot and std=err.
+
+    specify rand_type = 'Gaussian'
+    """
+    if rand_type == 'uniform':
+        Ddot_samp = np.random.random_sample(num) * (err * 2) + (Ddot - err)
+
+    elif rand_type in ('Gaussian', 'gauusian', 'normal'):
+        Ddot_samp = np.random.randn(num) * err + Ddot
+
+    return Ddot_samp
+
+
+def calc_Mo_from_M(M, C=6):
     """
     Calculate seismic moment (Mo) from
     moment magnitude (M) given a scaling law
@@ -100,16 +166,85 @@ def Mo_from_M(M, C=6):
     return Mo
 
 
-def calc_rec_int(Mo=None, dip=None, mu=6e9, L=None, z=None,
-                 slip_rate=None):
+def calc_recurrence_interval(Mo=None, dip=None, mu=6e9, L=None, z=None,
+                            slip_rate=None, area_dim='km', 
+                            slip_rate_dim='mm/yr', dip_dim='degrees'):
+    """
+    Calculates the recurrence interval for an earthquake of moment 'Mo'
+    given dip, shear modulus 'mu', length 'L', seismogenic thickness 'z',
+    and slip rate.
+
+    Is currently set up to convert from typical dimensions to meters and
+    radians; units other than distances in km, slip rates in mm/yr, and
+    dips in degrees should be converted to meters and radians before passing
+    to function.
+
+    Returns recurrence interval in years.
+    """
+
+    if area_dim == 'km':
+        L *= 1000
+        z *= 1000
+
+    if slip_rate_dim in ('mm/yr', 'mm/a'):
+        slip_rate *= 0.001
+
+    if dip_dim == 'degrees':
+        dip = np.radians(dip)
     
     return Mo * np.sin(dip) / (mu * L * z * slip_rate)
 
 
-def prob_above_val(series, val):
+def calc_cumulative_yrs(recur_interval_sequence):
+    """
+    Calculates cumulative years from a sequence of recurrence intervals.
+    Sequences are input as floats, and returned as integers, to be used
+    as in index.
+
+    Returns array of ints, with shape of input array.
+    """
+    return np.int_(np.cumsum(recur_interval_sequence.round() ) )
+
+
+def make_eq_time_series(eq_seq=None, cum_years_seq=None ):
+    """
+    Takes a sequence of earthquake magnitudes (eq_seq) and their years
+    in a time series (cum_years_seq) and returns a time series where
+    the value of the series represents the magnitude of an earthquake
+    in that year.  Each earthquake is separated from the earthquake before
+    it by the number of years required to accumulate all the strain/moment
+    released in that earthquake.
+
+    Returns an array of length max(cum_years_seq)+1
+    """
+    eq_time_series = np.zeros( np.max(cum_years_seq) +1)
+
+    for i in np.arange( len(cum_years_seq -1) ):
+        yr = cum_years_seq[i]
+        mag = eq_seq[i]
+        eq_time_series[yr] = mag
+
+    return eq_time_series
+
+
+def get_probability_above_value(series, val):
     count_above = len( series[series >= val])
     
     return count_above / float(len(series) )
 
 
+def get_prob_above_val_in_window(series, value, window):
+    """
+    Takes a series of events, and calculates the probability that an 
+    event >= a size 'value' will be observed in a contiguous time window of 
+    size 'window'.
 
+    Basically, this function takes the window and slides it along the time
+    series, and counts how many times an event >= val is found in the window.
+    
+    Returns a decimal [0,1) expressing the number of successes to the total
+    number.
+    """
+    rolling_max_series = pd.rolling_max(series, window)
+
+    return get_probability_above_value(rolling_max_series, value)
