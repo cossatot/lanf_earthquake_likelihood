@@ -174,7 +174,7 @@ def calc_M_from_Mo(Mo, C=6):
     return (2/3.) * np.log10(Mo) - C
 
 
-def calc_recurrence_interval(Mo=None, dip=None, mu=6e9, L=None, z=None,
+def calc_recurrence_interval(Mo=None, dip=None, mu=3e9, L=None, z=None,
                             slip_rate=None, area_dim='km', 
                             slip_rate_dim='mm/yr', dip_dim='degrees'):
     """
