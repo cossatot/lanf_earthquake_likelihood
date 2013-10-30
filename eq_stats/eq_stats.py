@@ -166,6 +166,14 @@ def calc_Mo_from_M(M, C=6):
     return Mo
 
 
+def calc_M_from_Mo(Mo, C=6):
+    """
+    Calculates moment magnitude (M) from seismic moment (Mo)
+    given a scaling law.
+    """
+    return (2/3.) * np.log10(Mo) - C
+
+
 def calc_recurrence_interval(Mo=None, dip=None, mu=6e9, L=None, z=None,
                             slip_rate=None, area_dim='km', 
                             slip_rate_dim='mm/yr', dip_dim='degrees'):
