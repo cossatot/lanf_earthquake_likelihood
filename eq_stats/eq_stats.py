@@ -226,11 +226,8 @@ def make_eq_time_series(eq_seq=None, cum_years_seq=None ):
     Returns an array of length max(cum_years_seq)+1
     """
     eq_time_series = np.zeros( np.max(cum_years_seq) +1)
-
-    for i in np.arange( len(cum_years_seq -1) ):
-        yr = cum_years_seq[i]
-        mag = eq_seq[i]
-        eq_time_series[yr] = mag
+    
+    eq_time_series[cum_years_seq] = eq_seq
 
     return eq_time_series
 
