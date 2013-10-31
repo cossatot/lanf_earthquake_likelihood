@@ -187,7 +187,7 @@ def calc_M_from_Mo(Mo, C=C):
 
 
 def calc_Mo_from_fault_params(L=None, z=None, dip=None, mu=mu, D=None,
-                              area_dim='km', slip_dim='m', dip_dim='deg'):
+                              area_dim='km', slip_dim='m', dip_dim='degrees'):
     """
     Calculates the seismic moment Mo (in N m) from fault dimensions,
     shear modulus mu, and mean slip distance.
