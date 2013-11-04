@@ -269,8 +269,12 @@ def make_eq_time_series(eq_seq=None, cum_years_seq=None ):
     return eq_time_series
 
 
-def get_probability_above_value(series, val):
-    count_above = len( series[series >= val])
+def get_probability_above_value(series, vals):
+    vals = np.array(vals)
+
+    count_above = np.zeros(vals.shape)
+    for i, val in enumerate(vals):
+        count_above[i] = len( series[series >= val])
     
     return count_above / float(len(series) )
 
