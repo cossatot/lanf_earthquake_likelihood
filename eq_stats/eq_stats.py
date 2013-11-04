@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 
+mu = 3e9
+C = 6
+
 def F(M=None, Mmin=2.5, Mc=7.64, B=0.65):
     """
     F(M) is the tapered Gutenberg-Richter distribution
@@ -153,10 +156,14 @@ def Ddot_rand_samp(Ddot, err, num, rand_type = 'uniform'):
     return Ddot_samp
 
 
-def calc_Mo_from_M(M, C=6):
+def calc_Mo_from_M(M, C=C):
     """
     Calculate seismic moment (Mo) from
-    moment magnitude (M) given a scaling law
+    moment magnitude (M) given a scaling law.
+
+    C is a scaling constant; should be set at 6,
+    but is defined elsewhere in the module so
+    that all functions using it share a value.
     """
     term1 = 3/2. * C * (np.log(2) + np.log(5) )
     term2 = 3/2. * M * (np.log(2) + np.log(5) )
@@ -166,15 +173,45 @@ def calc_Mo_from_M(M, C=6):
     return Mo
 
 
-def calc_M_from_Mo(Mo, C=6):
+def calc_M_from_Mo(Mo, C=C):
     """
     Calculates moment magnitude (M) from seismic moment (Mo)
     given a scaling law.
+
+    C is a scaling constant; should be set at 6,
+    but is defined elsewhere in the module so
+    that all functions using it share a value.
+
     """
     return (2/3.) * np.log10(Mo) - C
 
 
-def calc_recurrence_interval(Mo=None, dip=None, mu=3e9, L=None, z=None,
+def calc_Mo_from_fault_params(L=None, z=None, dip=None, mu=mu, D=None,
+                              area_dim='km', slip_dim='m', dip_dim='degrees'):
+    """
+    Calculates the seismic moment Mo (in N m) from fault dimensions,
+    shear modulus mu, and mean slip distance.
+
+    Is currently set up to convert from typical dimensions to meters and
+    radians; units other than distances in km, slip (D) in m, and
+    dips in degrees should be converted to meters and radians before passing
+    to function.
+
+
+    mu should be set at 3e9 (30 GPa) at the top of the module; but it may
+    change.  It is defined elsewhere so that all functions use the same value.
+    """
+    if area_dim == 'km':
+        L *= 1000
+        z *= 1000
+
+    if dip_dim == 'degrees':
+        dip = np.radians(dip)
+
+    return (L * z * mu * D) / np.sin(dip)
+
+
+def calc_recurrence_interval(Mo=None, dip=None, mu=mu, L=None, z=None,
                             slip_rate=None, area_dim='km', 
                             slip_rate_dim='mm/yr', dip_dim='degrees'):
     """
