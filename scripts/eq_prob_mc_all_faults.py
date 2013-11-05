@@ -26,70 +26,70 @@ Mc = 7.64
 #FM_vec = eqs.F(M=M_vec, Mc=Mc)
 
 # load fault data and make dfs for each minimum search magnitude
-params = f.loc['s_lunggar']
-
-slr = {}
 min_M_list = [5, 5.5, 6, 6.5, 7, 7.5]
+
+df_ind_tuples = [[i, M] for i in mc_index for M in min_M_list]
+df_multi_ind = pd.MultiIndex.from_tuples(df_ind_tuples, names=['mc_iter','M'])
+
 
 
 # define function to calculate probabilities for each iteration
 # function is defined here so it can access all variables
-def calc_row_probs(fault, df, index):
-    params = f.loc[fault]
-    ss = df.iloc[index]
-    # Calculate maximum EQ size based on maximum mean slip (D)
-    max_Mo = eqs.calc_Mo_from_fault_params(L=params['L_km'], 
-                                           z=params['z_km'], 
-                                           dip=ss['dip'], D=max_eq_slip)
-    max_M = eqs.calc_M_from_Mo(max_Mo)
-    
+def calc_iter_probs(iter):
+    df_iter = fdf.loc[iter].copy()
+    df_iter['dip'] = mc_d['dip_samp'][iter]
+    df_iter['Ddot'] = mc_d['Ddot_samp'][iter]
+
     # Generate EQ sample/sequence from F(M) dist.
-    m_vec = np.linspace(5, max_M, num=1000)
+    m_vec = np.linspace(5, mc_d['max_M'][iter], num=1000)
     fm_vec = eqs.F(m_vec, Mc=Mc)
     M_samp = eqs.sample_from_pdf(m_vec, fm_vec, n_eq_samp)
     Mo_samp = eqs.calc_Mo_from_M(M_samp)
     
     # Make time series of earthquakes, including no eq years
-    recur_int = eqs.calc_recurrence_interval(Mo=Mo_samp, dip=ss['dip'],
-                                             slip_rate=ss['Ddot'],
+    recur_int = eqs.calc_recurrence_interval(Mo=Mo_samp, 
+                                             dip=mc_d['dip_samp'][iter],
+                                             slip_rate=mc_d['Ddot_samp'][iter],
                                              L=params['L_km'],
                                              z=params['z_km'])
+
     cum_yrs = eqs.calc_cumulative_yrs(recur_int)
     eq_series = eqs.make_eq_time_series(M_samp, cum_yrs)
     
     # calculate probability of observing EQ in time_window
     for t in time_window:
-        ss[t] = ( eqs.get_prob_above_val_in_window(eq_series, MM, t)
-                 * slr_dip_frac)
-    return ss
+        roll_max = pd.rolling_max(eq_series, t)
+        df_iter[t] = eqs.get_probability_above_value(roll_max, min_M_list)
 
-# run script
+    return df_iter
 
-f_d = {}
-for fault in list(f.index):    
-    f_d[fault] = {}
-    ff = f_d[fault]
+# run for south lunggar trial
+for fault in list(f.index):
+    fdf = pd.DataFrame(index=df_multi_ind, columns=mc_cols, dtype='float')
+    params = f.loc[fault]
+    mc_d = {}
+    mc_d['dip_samp'], mc_d['dip_frac'] = eqs.dip_rand_samp( params['dip_deg'], 
+                                                         params['dip_err_deg'], 
+                                                         mc_iters)
 
-    for MM in min_M_list:
-        ff[MM] = pd.DataFrame(index=mc_index, columns=mc_cols, dtype='float')
+    mc_d['Ddot_samp'] = eqs.Ddot_rand_samp(params['slip_rate_mm_a'],
+                                           params['sr_err_mm_a'], mc_iters)
+
+    mc_d['max_Mo'] = eqs.calc_Mo_from_fault_params(L=params['L_km'], 
+                                                   z=params['z_km'], 
+                                                   dip=mc_d['dip_samp'], 
+                                                   D=max_eq_slip)
+
+    mc_d['max_M'] = eqs.calc_M_from_Mo(mc_d['max_Mo'])
+
+    t0 = time.time()
+    prob_list = Parallel(n_jobs=-2)( delayed( calc_iter_probs)(ii) 
+                                    for ii in mc_index)
+    print 'done with parallel calcs in {} s'.format( (time.time()-t0) )
+    for ii in mc_index:
+        fdf.loc[ii][:] = prob_list[ii]
+    fdf.to_csv('../results/{}_all_M.csv'.format(fault))
+
+    print 'done with {}'.format(fault)
+
     
-        ff[MM].dip, slr_dip_frac = eqs.dip_rand_samp( params['dip_deg'],
-                                                     params['dip_err_deg'],
-                                                     mc_iters)
-    
-        ff[MM].Ddot = eqs.Ddot_rand_samp(params['slip_rate_mm_a'],
-                                          params['sr_err_mm_a'], mc_iters)
-
-
-        t_in = time.time()
-        ss_list = Parallel(n_jobs=-2)(delayed( calc_row_probs)(fault, ff[MM], 
-            ii)
-                                      for ii in mc_index)
-        for n_row, ser in enumerate(ss_list):
-            ind = ser.index
-            ff[MM].iloc[n_row][list(ind)] = ser.values
-
-        
-        print 'done with', fault, MM, 'in', time.time()-t_in, 's'
-
-
