@@ -13,9 +13,9 @@ from joblib import Parallel, delayed
 f = pd.read_csv('../data/lanf_stats.csv', index_col=0) 
 
 # define some constants and parameters
-n_eq_samp = 2.5e4 # number of earthquakes in time series
+n_eq_samp = 5e4 # number of earthquakes in time series
 time_window = np.hstack( (1, np.arange(5, 105, step=5) ) ) # observation times
-mc_iters = 5 # number of Monte Carlo iterations
+mc_iters = 1e3 # number of Monte Carlo iterations
 mc_index = np.arange(mc_iters, dtype='int')
 mc_cols = ['dip', 'Ddot'] + [t for t in time_window]
 max_eq_slip = 15 #m
@@ -64,7 +64,7 @@ def calc_iter_probs(iter):
     return df_iter
 
 # run for south lunggar trial
-for fault in ['s_lunggar']: #list(f.index):
+for fault in list(f.index):
     fdf = pd.DataFrame(index=df_multi_ind, columns=mc_cols, dtype='float')
     params = f.loc[fault]
     mc_d = {}
