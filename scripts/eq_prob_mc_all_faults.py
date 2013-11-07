@@ -13,9 +13,10 @@ from joblib import Parallel, delayed
 f = pd.read_csv('../data/lanf_stats.csv', index_col=0) 
 
 # define some constants and parameters
-n_eq_samp = 5e4 # number of earthquakes in time series
+n_cores = -4 # number of cores for parallel processing
+n_eq_samp = 3e4 # number of earthquakes in time series
 time_window = np.hstack( (1, np.arange(5, 105, step=5) ) ) # observation times
-mc_iters = 1e3 # number of Monte Carlo iterations
+mc_iters = 2e3 # number of Monte Carlo iterations
 mc_index = np.arange(mc_iters, dtype='int')
 mc_cols = ['dip', 'Ddot'] + [t for t in time_window]
 max_eq_slip = 15 #m
@@ -59,7 +60,8 @@ def calc_iter_probs(iter):
     # calculate probability of observing EQ in time_window
     for t in time_window:
         roll_max = pd.rolling_max(eq_series, t)
-        df_iter[t] = eqs.get_probability_above_value(roll_max, min_M_list)
+        df_iter[t] = (eqs.get_probability_above_value(roll_max, min_M_list)
+                      * mc_d['dip_frac'] )
 
     return df_iter
 
@@ -83,13 +85,9 @@ for fault in list(f.index):
     mc_d['max_M'] = eqs.calc_M_from_Mo(mc_d['max_Mo'])
 
     t0 = time.time()
-    prob_list = Parallel(n_jobs=-2)( delayed( calc_iter_probs)(ii) 
+    prob_list = Parallel(n_jobs=n_cores)( delayed( calc_iter_probs)(ii) 
                                     for ii in mc_index)
-    print 'done with parallel calcs in {} s'.format( (time.time()-t0) )
+    print 'done with', fault, 'parallel calcs in {} s'.format((time.time()-t0))
     for ii in mc_index:
         fdf.loc[ii][:] = prob_list[ii]
-    fdf.to_csv('../results/{}_all_M.csv'.format(fault))
-
-    print 'done with {}'.format(fault)
-
-    
+    fdf.to_csv('../results/{}_all_M.csv'.format(fault))    
