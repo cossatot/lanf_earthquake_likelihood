@@ -1,21 +1,9 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% AGUtmpl.tex: this template file is for articles formatted with LaTeX2e,
-% Modified March 2013
-%
-% This template includes commands and instructions
-% given in the order necessary to produce a final output that will
-% satisfy AGU requirements.
-%
-% PLEASE DO NOT USE YOUR OWN MACROS
 % DO NOT USE \newcommand, \renewcommand, or \def.
-%
 % FOR FIGURES, DO NOT USE \psfrag or \subfigure.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 
 %\documentclass[draft,grl]{AGUTeX}
 \documentclass[twocolumn,grl]{AGUTeX}
+\usepackage{times}
 % \usepackage{lineno}
 % \linenumbers*[1]
 
@@ -26,7 +14,6 @@
 %  \end{linenomath*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Figures and Tables
-%
 %
 % DO NOT USE \psfrag or \subfigure commands.
 %
@@ -51,51 +38,18 @@
 %
 % See how to enter figures and tables at the end of the article, after
 % references.
-%
-%% ------------------------------------------------------------------------ %%
-%
-%  ENTER PREAMBLE
-%
-%% ------------------------------------------------------------------------ %%
 
-% Author names in capital letters:
+
 \authorrunninghead{STYRON AND HETLAND}
-
-% Shorter version of title entered in capital letters:
 \titlerunninghead{LANF EARTHQUAKE LIKELIHOOD}
 
-%Corresponding author mailing address and e-mail address:
 \authoraddr{Corresponding author: Richard H. Styron,
 Department of Earth and Environmental Sciences, University of
 Michigan, 2534 CC Little Bldg., 1100 N. University Ave., 
 Ann Arbor, MI 48104, USA (richard.h.styron@gmail.com)}
 
 \begin{document}
-
-%% ------------------------------------------------------------------------ %%
-%
-%  TITLE
-%
-%% ------------------------------------------------------------------------ %%
-
-
 \title{Likelihood of observing an earthquake on a low-angle normal fault}
-%
-% e.g., \title{Terrestrial ring current:
-% Origin, formation, and decay $\alpha\beta\Gamma\Delta$}
-%
-
-%% ------------------------------------------------------------------------ %%
-%
-%  AUTHORS AND AFFILIATIONS
-%
-%% ------------------------------------------------------------------------ %%
-
-
-%Use \author{\altaffilmark{}} and \altaffiltext{}
-
-% \altaffilmark will produce footnote;
-% matching \altaffiltext will appear at bottom of page.
 
 \authors{Richard H. Styron \altaffilmark{1}
 and Eric A. Hetland \altaffilmark{1}}
@@ -103,40 +57,14 @@ and Eric A. Hetland \altaffilmark{1}}
 \altaffiltext{1}{Department of Earth and Environmental Sciences, University of
 Michigan, Ann Arbor, Michigan, USA.}
 
-%% ------------------------------------------------------------------------ %%
-%
-%  ABSTRACT
-%
-%% ------------------------------------------------------------------------ %%
-
-% >> Do NOT include any \begin...\end commands within
-% >> the body of the abstract.
-
 \begin{abstract}
-(Type abstract here)
+rothko
 \end{abstract}
-
-%% ------------------------------------------------------------------------ %%
-%
-%  BEGIN ARTICLE
-%
-%% ------------------------------------------------------------------------ %%
-
-% The body of the article must start with a \begin{article} command
-%
-% \end{article} must follow the references section, before the figures
-%  and tables.
 
 \begin{article}
 
-%% ------------------------------------------------------------------------ %%
-%
-%  TEXT
-%
-%% ------------------------------------------------------------------------ %%
-
 \section{Introduction}
-The recognition of low-angle normal faults, or LANFs, with fault dips <30$^\circ$ in the geologic record and their hypothesized role in accommodating large-magnitude continental extension [1] has been one of the most important developments in tectonics over the past several decades.
+The recognition of low-angle normal faults, or LANFs, with fault dips less than 30$^\circ$ in the geologic record and their hypothesized role in accommodating large-magnitude continental extension [1] has been one of the most important developments in tectonics over the past several decades.
 However, despite widespread field observations of inactive LANFs[2] and their central role in modern extensional tectonic theory[3], they remain enigmatic and contentious structures. 
 This is for two reasons: because brittle faulting on LANFs is in apparent conflict with standard rock mechanical theory as typically applied to the upper crust [4,5], and because observations of active faulting on LANFs is sparse and at times ambiguous[6,7].
 A considerable amount of research has been performed to address the former concern, reconciling LANF slip with rock mechanics.
@@ -146,7 +74,24 @@ Alternately, the lack of observed seismic slip on a continental LANF may be expl
 
 In this work, we choose to directly address the question of whether the lack of observed seismicity may be interpreted as an indication that LANFs may not slip seismically, or is an effect of a small sample size of LANFs that show typical seismic behavior.  We do this by calculating the likelihood of observing a moderate to large earthquake on a LANF over different time windows, assuming that all continental LANFs described in the literature are seismically active at low angles and display typical seismic behavior.
 
-\section{Potentially active LANFs}
+\section{Potentially Active LANFs}
+
+Over the past decade or so, many field studies have found evidence for LANF activity in orogens throughout the world. These studies typically find arrays of Quaternary normal fault scarps on the fault traces and/or in the hanging walls of mapped or inferred low-angle detachment faults [e.g, Axen et al., 1999]. Some studies also have bedrock thermochronology data from the exhumed footwalls of the detachments that is suggestive of ongoing rapid exhumation [e.g. Sundell et al., 2013], although this data does not preclude a recent cessation of faulting. In some cases, additional evidence for LANF activity comes from geophysical data such as GPS geodesy [Hreinsdottir and Bennett, 2009] and seismic waves [Doser, 1987].
+
+We have compiled all potentially active LANFs with known subareal fault traces from a thorough review of the literature; there are nineteen total (Figure 1).  About half are in Tibet, consistent with hypotheses that LANF and metamorphic core complexes form in areas of hot, thick crust [e.g., Buck, 1988].  The rest are distributed through other areas of active continental extension: the North American Basin and Range, the Malay Archipelago, Turkey, Italy, and Peru. Several of the most-commonly cited candidates for seismically active LANFs were not included because they do not have a clearly-defined, mappable fault trace, which is necessary for our calculations.  These include the submarine core complexes in the Woodlark Basin [Abers, 2001], the fault responsible for the 1995 Aigion, Greece earthquake [Bernard et al., 1997] and other potential LANFs underneath the Gulf of Corinth, and the fault responsible for the 1952 Ancash, Peru earthquake [Doser, 19xx].
+
+We have then mapped the approximate fault traces into a GIS file (available at https://github.com/cossatot/LANF\_gis), with metadata such as slip rate and source. We then have estimated the probability of observing an earthquake above a given magnitude for each fault individually over some time window, and then calculated the probability of observing a significant earthquake on any of the faults over that same time window.
+
+\section{Likelihood of observing a LANF earthquake}
+\subsection{Rupture Likelihood on Individual LANFs}
+To estimate the likelihood of observing a significant earthquake on an individual LANF over some contiguous time window of length $t$ (in years), we perform a Monte Carlo simulation in which we create 2000 synthetic time series of earthquakes, with unique values for fault geometry and slip rate for each time series, and then for each time series, we calculate the fraction of unique time windows of length $t$ in which an earthquake as large or larger than a given magnitude occurs.
+
+Each earthquake sequence is generated by randomly sampling 50,000 events from a tapered Gutenberg-Richter distribution with corner magnitude $M_c = 7.64$ and $\beta = 0.65$ (from values estimated by Bird and Kagan [2004] for continental rifts) using an inverse transform sampling algorithm.  The samples are taken from a moment magnitude interval $M = [5.0, \, M_{max}]$, where $M_{max}$ is calculated as the magnitude M resulting from fault slip $D$ = 15 m over a fault of length $L$ cutting through a seismogenic thickness $z$ at dip $\delta$, given the relations $ M_o = \mu L z D \,/ \, \sin \delta $ and $ M = 2/3 \; \log_{10} (M_o) - C $, where $C = 6 $ and shear modulus $\mu = 30$ GPa.  Sensitivity tests (see Supplementary Materials) show that the results are only slightly affected by the frequency-magnitude distribution: differences between results using this distribution and a `characteristic' distribution with an enhanced probability of earthquakes around $M$ 6 are well below the variability created by uncertainty in fault dip and slip rate.
+
+Then, a time series of strain accumulation and release for each earthquake sequence is created, with one value per year.  This is constructed by separating each earthquake from the previous one with a set of zeros (representing no significant earthquakes for those years) where the number of zero years before an event corresponds to the length of an interseismic interval necessary to accumulate all the slip released in that event, given the fault dimensions and slip rate for that time series. Then, the likelihood of observing a significant earthquake is calculated as described above.
+
+\subsection{Joint probability on all LANFs}
+$1-q^n$
 
 %%% End of body of article:
 
@@ -161,25 +106,6 @@ In this work, we choose to directly address the question of whether the lack of 
 % will show
 % Appendix A: Here Is Appendix Title
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Optional Glossary or Notation section, goes here
-%
-%%%%%%%%%%%%%%
-% Glossary is only allowed in Reviews of Geophysics
-% \section*{Glossary}
-% \paragraph{Term}
-% Term Definition here
-%
-%%%%%%%%%%%%%%
-% Notation -- End each entry with a period.
-% \begin{notation}
-% Term & definition.\\
-% Second term & second definition.\\
-% \end{notation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  ACKNOWLEDGMENTS
 
 \begin{acknowledgments}
 (Text here)
@@ -315,166 +241,4 @@ In this work, we choose to directly address the question of whether the lack of 
 
 \end{document}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-More Information and Advice:
-
-%% ------------------------------------------------------------------------ %%
-%
-%  SECTION HEADS
-%
-%% ------------------------------------------------------------------------ %%
-
-% Capitalize the first letter of each word (except for
-% prepositions, conjunctions, and articles that are
-% three or fewer letters).
-
-% AGU follows standard outline style; therefore, there cannot be a section 1 without
-% a section 2, or a section 2.3.1 without a section 2.3.2.
-% Please make sure your section numbers are balanced.
-% ---------------
-% Level 1 head
-%
-% Use the \section{} command to identify level 1 heads;
-% type the appropriate head wording between the curly
-% brackets, as shown below.
-%
-%An example:
-%\section{Level 1 Head: Introduction}
-%
-% ---------------
-% Level 2 head
-%
-% Use the \subsection{} command to identify level 2 heads.
-%An example:
-%\subsection{Level 2 Head}
-%
-% ---------------
-% Level 3 head
-%
-% Use the \subsubsection{} command to identify level 3 heads
-%An example:
-%\subsubsection{Level 3 Head}
-%
-%---------------
-% Level 4 head
-%
-% Use the \subsubsubsection{} command to identify level 3 heads
-% An example:
-%\subsubsubsection{Level 4 Head} An example.
-%
-%% ------------------------------------------------------------------------ %%
-%
-%  IN-TEXT LISTS
-%
-%% ------------------------------------------------------------------------ %%
-%
-% Do not use bulleted lists; enumerated lists are okay.
-% \begin{enumerate}
-% \item
-% \item
-% \item
-% \end{enumerate}
-%
-%% ------------------------------------------------------------------------ %%
-%
-%  EQUATIONS
-%
-%% ------------------------------------------------------------------------ %%
-
-% Single-line equations are centered.
-% Equation arrays will appear left-aligned.
-
-Math coded inside display math mode \[ ...\]
- will not be numbered, e.g.,:
- \[ x^2=y^2 + z^2\]
-
- Math coded inside \begin{equation} and \end{equation} will
- be automatically numbered, e.g.,:
- \begin{equation}
- x^2=y^2 + z^2
- \end{equation}
-
-% IF YOU HAVE MULTI-LINE EQUATIONS, PLEASE
-% BREAK THE EQUATIONS INTO TWO OR MORE LINES
-% OF SINGLE COLUMN WIDTH (20 pc, 8.3 cm)
-% using double backslashes (\\).
-
-% To create multiline equations, use the
-% \begin{eqnarray} and \end{eqnarray} environment
-% as demonstrated below.
-\begin{eqnarray}
-  x_{1} & = & (x - x_{0}) \cos \Theta \nonumber \\
-        && + (y - y_{0}) \sin \Theta  \nonumber \\
-  y_{1} & = & -(x - x_{0}) \sin \Theta \nonumber \\
-        && + (y - y_{0}) \cos \Theta.
-\end{eqnarray}
-
-%If you don't want an equation number, use the star form:
-%\begin{eqnarray*}...\end{eqnarray*}
-
-% Break each line at a sign of operation
-% (+, -, etc.) if possible, with the sign of operation
-% on the new line.
-
-% Indent second and subsequent lines to align with
-% the first character following the equal sign on the
-% first line.
-
-% Use an \hspace{} command to insert horizontal space
-% into your equation if necessary. Place an appropriate
-% unit of measure between the curly braces, e.g.
-% \hspace{1in}; you may have to experiment to achieve
-% the correct amount of space.
-
-
-%% ------------------------------------------------------------------------ %%
-%
-%  EQUATION NUMBERING: COUNTER
-%
-%% ------------------------------------------------------------------------ %%
-
-% You may change equation numbering by resetting
-% the equation counter or by explicitly numbering
-% an equation.
-
-% To explicitly number an equation, type \eqnum{}
-% (with the desired number between the brackets)
-% after the \begin{equation} or \begin{eqnarray}
-% command.  The \eqnum{} command will affect only
-% the equation it appears with; LaTeX will number
-% any equations appearing later in the manuscript
-% according to the equation counter.
-%
-
-% If you have a multiline equation that needs only
-% one equation number, use a \nonumber command in
-% front of the double backslashes (\\) as shown in
-% the multiline equation above.
-
-%% ------------------------------------------------------------------------ %%
-%
-%  SIDEWAYS FIGURE AND TABLE EXAMPLES
-%
-%% ------------------------------------------------------------------------ %%
-%
-% For tables and figures, add \usepackage{rotating} to the paper and add the rotating.sty file to the folder.
-% AGU prefers the use of {sidewaystable} over {landscapetable} as it causes fewer problems.
-%
-% \begin{sidewaysfigure}
-% \includegraphics[width=20pc]{samplefigure.eps}
-% \caption{caption here}
-% \label{label_here}
-% \end{sidewaysfigure}
-%
-%
-%
-% \begin{sidewaystable}
-% \caption{}
-% \begin{tabular}
-% Table layout here.
-% \end{tabular}
-% \end{sidewaystable}
-%
-%
 

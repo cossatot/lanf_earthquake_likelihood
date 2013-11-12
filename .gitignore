@@ -1,5 +1,10 @@
 # Compiled Source
 #################
-
 *.pyc
 
+
+
+
+manuscript/*.pdf
+manuscript/*.aux
+manuscript/*.log
