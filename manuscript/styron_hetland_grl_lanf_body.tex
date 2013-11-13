@@ -1,9 +1,6 @@
-% DO NOT USE \newcommand, \renewcommand, or \def.
-% FOR FIGURES, DO NOT USE \psfrag or \subfigure.
-
 %\documentclass[draft,grl]{AGUTeX}
 \documentclass[twocolumn,grl]{AGUTeX}
-\usepackage{times}
+\usepackage{mathptmx}
 % \usepackage{lineno}
 % \linenumbers*[1]
 
@@ -12,33 +9,12 @@
 %  \begin{equation}
 %  \end{equation}
 %  \end{linenomath*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Figures and Tables
-%
-% DO NOT USE \psfrag or \subfigure commands.
-%
-%  Figures and tables should be placed AT THE END OF THE ARTICLE,
-%  after the references.
-%
+
 %  Uncomment the following command to include .eps files
 %  (comment out this line for draft format):
-%  \usepackage[dvips]{graphicx}
-%
-%  Uncomment the following command to allow illustrations to print
-%   when using Draft:
-%  \setkeys{Gin}{draft=false}
-%
-% Substitute one of the following for [dvips] above
-% if you are using a different driver program and want to
-% proof your illustrations on your machine:
-%
-% [xdvi], [dvipdf], [dvipsone], [dviwindo], [emtex], [dviwin],
-% [pctexps],  [pctexwin],  [pctexhp],  [pctex32], [truetex], [tcidvi],
-% [oztex], [textures]
-%
-% See how to enter figures and tables at the end of the article, after
-% references.
-
+%\usepackage[dvips]{graphicx}
+\usepackage[pdftex]{graphicx}
+%\setkeys{Gin}{draft=false}
 
 \authorrunninghead{STYRON AND HETLAND}
 \titlerunninghead{LANF EARTHQUAKE LIKELIHOOD}
@@ -78,166 +54,42 @@ In this work, we choose to directly address the question of whether the lack of 
 
 Over the past decade or so, many field studies have found evidence for LANF activity in orogens throughout the world. These studies typically find arrays of Quaternary normal fault scarps on the fault traces and/or in the hanging walls of mapped or inferred low-angle detachment faults [e.g, Axen et al., 1999]. Some studies also have bedrock thermochronology data from the exhumed footwalls of the detachments that is suggestive of ongoing rapid exhumation [e.g. Sundell et al., 2013], although this data does not preclude a recent cessation of faulting. In some cases, additional evidence for LANF activity comes from geophysical data such as GPS geodesy [Hreinsdottir and Bennett, 2009] and seismic waves [Doser, 1987].
 
-We have compiled all potentially active LANFs with known subareal fault traces from a thorough review of the literature; there are nineteen total (Figure 1).  About half are in Tibet, consistent with hypotheses that LANF and metamorphic core complexes form in areas of hot, thick crust [e.g., Buck, 1988].  The rest are distributed through other areas of active continental extension: the North American Basin and Range, the Malay Archipelago, Turkey, Italy, and Peru. Several of the most-commonly cited candidates for seismically active LANFs were not included because they do not have a clearly-defined, mappable fault trace, which is necessary for our calculations.  These include the submarine core complexes in the Woodlark Basin [Abers, 2001], the fault responsible for the 1995 Aigion, Greece earthquake [Bernard et al., 1997] and other potential LANFs underneath the Gulf of Corinth, and the fault responsible for the 1952 Ancash, Peru earthquake [Doser, 19xx].
+We have compiled all potentially active LANFs with known subareal fault traces from a thorough review of the literature; there are nineteen total (Figure~\ref{fig:lanf_map}).  About half are in Tibet, consistent with hypotheses that LANF and metamorphic core complexes form in areas of hot, thick crust [e.g., Buck, 1988].  The rest are distributed through other areas of active continental extension: the North American Basin and Range, the Malay Archipelago, Turkey, Italy, and Peru. Several of the most-commonly cited candidates for seismically active LANFs were not included because they do not have a clearly-defined, mappable fault trace, which is necessary for our calculations.  These include the submarine core complexes in the Woodlark Basin [Abers, 2001], the fault responsible for the 1995 Aigion, Greece earthquake [Bernard et al., 1997] and other potential LANFs underneath the Gulf of Corinth, and the fault responsible for the 1952 Ancash, Peru earthquake [Doser, 19xx].
 
 We have then mapped the approximate fault traces into a GIS file (available at https://github.com/cossatot/LANF\_gis), with metadata such as slip rate and source. We then have estimated the probability of observing an earthquake above a given magnitude for each fault individually over some time window, and then calculated the probability of observing a significant earthquake on any of the faults over that same time window.
 
 \section{Likelihood of observing a LANF earthquake}
 \subsection{Rupture Likelihood on Individual LANFs}
-To estimate the likelihood of observing a significant earthquake on an individual LANF over some contiguous time window of length $t$ (in years), we perform a Monte Carlo simulation in which we create 2000 synthetic time series of earthquakes, with unique values for fault geometry and slip rate for each time series, and then for each time series, we calculate the fraction of unique time windows of length $t$ in which an earthquake as large or larger than a given magnitude occurs.
+To estimate the likelihood of observing a significant earthquake on an individual LANF over some contiguous time window of length $t$ (in years), we perform a Monte Carlo simulation in which we create 2000 synthetic time series of earthquakes, with unique values for fault geometry and slip rate for each time series. Then, for each time series we calculate the fraction of unique time windows of length $t$ in which an earthquake as large or larger than a given magnitude occurs.  We take this value as the probability of observing an earthquake.  This value is then multiplied by the fraction of the total range of fault dip which is at or below 30$^\circ$, as many of the faults studied have possible dips above 30$^\circ$.
 
 Each earthquake sequence is generated by randomly sampling 50,000 events from a tapered Gutenberg-Richter distribution with corner magnitude $M_c = 7.64$ and $\beta = 0.65$ (from values estimated by Bird and Kagan [2004] for continental rifts) using an inverse transform sampling algorithm.  The samples are taken from a moment magnitude interval $M = [5.0, \, M_{max}]$, where $M_{max}$ is calculated as the magnitude M resulting from fault slip $D$ = 15 m over a fault of length $L$ cutting through a seismogenic thickness $z$ at dip $\delta$, given the relations $ M_o = \mu L z D \,/ \, \sin \delta $ and $ M = 2/3 \; \log_{10} (M_o) - C $, where $C = 6 $ and shear modulus $\mu = 30$ GPa.  Sensitivity tests (see Supplementary Materials) show that the results are only slightly affected by the frequency-magnitude distribution: differences between results using this distribution and a `characteristic' distribution with an enhanced probability of earthquakes around $M$ 6 are well below the variability created by uncertainty in fault dip and slip rate.
 
 Then, a time series of strain accumulation and release for each earthquake sequence is created, with one value per year.  This is constructed by separating each earthquake from the previous one with a set of zeros (representing no significant earthquakes for those years) where the number of zero years before an event corresponds to the length of an interseismic interval necessary to accumulate all the slip released in that event, given the fault dimensions and slip rate for that time series. Then, the likelihood of observing a significant earthquake is calculated as described above.
 
-\subsection{Joint probability on all LANFs}
-$1-q^n$
+\subsection{Probability on All LANFs}
+To calculate the probability of observing an earthquake over the time window on any of the LANFs studied, we first assume that seismicity on each fault is independent and uncorrelated from seismicity on all other faults. This assumption is likely true for most faults, but may not be true for some proximal faults (such as the North and South Lunggar detachments, or the Papangeo and Tokorondo detachments), though it is hard to determine how these faults may interact.  Then, we determine the probability  
+\begin{equation}
+p_{AT \, or \, LP\, \ldots \, or \, DV} = 1 - (q_{AT} \cdot q_{LP} \cdot \ldots \, \cdot q_{DV})
+\end{equation}
+where $p_{AT}$ is the probability of observing an earthquake on a single LANF (the Alto-Tiberina fault), and $q_{AT} = 1 - p_{AT}$.
 
-%%% End of body of article:
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Optional Appendix goes here
-%
-% \appendix resets counters and redefines section heads
-% but doesn't print anything.
-% After typing \appendix
-%
-%\section{Here Is Appendix Title}
-% will show
-% Appendix A: Here Is Appendix Title
-%
+\appendix
+\section{Do I need an appendix?}
+The function of your appendix is ambiguous at best and probably unnecessary.
 
 \begin{acknowledgments}
-(Text here)
+We thank Jon Spencer for a stimulating discussion that lead to this work.
+
 \end{acknowledgments}
 
-%% ------------------------------------------------------------------------ %%
-%%  REFERENCE LIST AND TEXT CITATIONS
-%
-% Either type in your references using
-% \begin{thebibliography}{}
-% \bibitem{}
-% Text
-% \end{thebibliography}
-%
-% Or,
-%
-% If you use BiBTeX for your references, please use the agufull08.bst file (available at % ftp://ftp.agu.org/journals/latex/journals/Manuscript-Preparation/) to produce your .bbl
-% file and copy the contents into your paper here.
-%
-% Follow these steps:
-% 1. Run LaTeX on your LaTeX file.
-%
-% 2. Make sure the bibliography style appears as \bibliographystyle{agufull08}. Run BiBTeX on your LaTeX
-% file.
-%
-% 3. Open the new .bbl file containing the reference list and
-%   copy all the contents into your LaTeX file here.
-%
-% 4. Comment out the old \bibliographystyle and \bibliography commands.
-%
-% 5. Run LaTeX on your new file before submitting.
-%
-% AGU does not want a .bib or a .bbl file. Please copy in the contents of your .bbl file here.
-
-\begin{thebibliography}{}
-
-%\providecommand{\natexlab}[1]{#1}
-%\expandafter\ifx\csname urlstyle\endcsname\relax
-%  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
-%  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
-%  \urlstyle{rm}\Url}\fi
-%
-%\bibitem[{\textit{Atkinson and Sloan}(1991)}]{AtkinsonSloan}
-%Atkinson, K., and I.~Sloan (1991), The numerical solution of first-kind
-%  logarithmic-kernel integral equations on smooth open arcs, \textit{Math.
-%  Comp.}, \textit{56}(193), 119--139.
-%
-%\bibitem[{\textit{Colton and Kress}(1983)}]{ColtonKress1}
-%Colton, D., and R.~Kress (1983), \textit{Integral Equation Methods in
-%  Scattering Theory}, John Wiley, New York.
-%
-%\bibitem[{\textit{Hsiao et~al.}(1991)\textit{Hsiao, Stephan, and
-%  Wendland}}]{StephanHsiao}
-%Hsiao, G.~C., E.~P. Stephan, and W.~L. Wendland (1991), On the {D}irichlet
-%  problem in elasticity for a domain exterior to an arc, \textit{J. Comput.
-%  Appl. Math.}, \textit{34}(1), 1--19.
-%
-%\bibitem[{\textit{Lu and Ando}(2012)}]{LuAndo}
-%Lu, P., and M.~Ando (2012), Difference of scattering geometrical optics
-%  components and line integrals of currents in modified edge representation,
-%  \textit{Radio Sci.}, \textit{47},  RS3007, \doi{10.1029/2011RS004899}.
-
-\end{thebibliography}
-
-%Reference citation examples:
-
-%...as shown by \textit{Kilby} [2008].
-%...as shown by {\textit  {Lewin}} [1976], {\textit  {Carson}} [1986], {\textit  {Bartholdy and Billi}} [2002], and {\textit  {Rinaldi}} [2003].
-%...has been shown [\textit{Kilby et al.}, 2008].
-%...has been shown [{\textit  {Lewin}}, 1976; {\textit  {Carson}}, 1986; {\textit  {Bartholdy and Billi}}, 2002; {\textit  {Rinaldi}}, 2003].
-%...has been shown [e.g., {\textit  {Lewin}}, 1976; {\textit  {Carson}}, 1986; {\textit  {Bartholdy and Billi}}, 2002; {\textit  {Rinaldi}}, 2003].
-
-%...as shown by \citet{jskilby}.
-%...as shown by \citet{lewin76}, \citet{carson86}, \citet{bartoldy02}, and \citet{rinaldi03}.
-%...has been shown \citep{jskilbye}.
-%...has been shown \citep{lewin76,carson86,bartoldy02,rinaldi03}.
-%...has been shown \citep [e.g.,][]{lewin76,carson86,bartoldy02,rinaldi03}.
-%
-% Please use ONLY \citet and \citep for reference citations.
-% DO NOT use other cite commands (e.g., \cite, \citeyear, \nocite, \citealp, etc.).
-
-%% ------------------------------------------------------------------------ %%
-%
-%  END ARTICLE
-%
-%% ------------------------------------------------------------------------ %%
 \end{article}
-%
-%
-%% Enter Figures and Tables here:
-%
-% DO NOT USE \psfrag or \subfigure commands.
-%
-% Figure captions go below the figure.
-% Table titles go above tables; all other caption information
-%  should be placed in footnotes below the table.
-%
-%----------------
-% EXAMPLE FIGURE
-%
-% \begin{figure}
-% \noindent\includegraphics[width=20pc]{samplefigure.eps}
-% \caption{Caption text here}
-% \label{figure_label}
-% \end{figure}
 
+\begin{figure}
+\noindent\includegraphics[width=40pc]{figures/active_lanfs_map_insets.pdf}
+\caption{Map of known, potentially active continental LANFs (blue lines), with insets showing the physiographic context of the faults.  DXV=Dixie Valley fault.  PV=Panamint Valley fault.  DV=Death Valley fault.  LS=Laguna Salada fault.  CB=Cordillera Blanca detachment.  AT=Alto-Tiberina fault.  KZ=Kuzey detachment.  GN=Guney detachment.  KS=Kongur Shan fault.  LP=Leo Pargil detachment.  GM=Gurla Mandhata detachment. NLR=North Lunggar detachment.  SLR=South Lunggar detachment.  PXN=Pum Qu--Xainza north fault.  PXQ=Pum Qu--Xainza Qingdu fault.  NQTL=Nyainqentanglha detachment.  PP=Papangeo detachment.  TK=Tokorondo detachment.  DD=Dayman Dome.}
+\label{fig:lanf_map}
+\end{figure}
 
-%
-% ---------------
-% EXAMPLE TABLE
-%
-%\begin{table}
-%\caption{Time of the Transition Between Phase 1 and Phase 2\tablenotemark{a}}
-%\centering
-%\begin{tabular}{l c}
-%\hline
-% Run  & Time (min)  \\
-%\hline
-%  $l1$  & 260   \\
-%  $l2$  & 300   \\
-%  $l3$  & 340   \\
-%  $h1$  & 270   \\
-%  $h2$  & 250   \\
-%  $h3$  & 380   \\
-%  $r1$  & 370   \\
-%  $r2$  & 390   \\
-%\hline
-%\end{tabular}
-%\tablenotetext{a}{Footnote text here.}
-%\end{table}
-
-% See below for how to make sideways figures or tables.
 
 \end{document}
 
