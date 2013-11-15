@@ -1,27 +1,30 @@
 Notes
 
+Eric's concerns that need to be addressed:
+- influence of F(M) distribution
+- influence of assumption of planar faults and dimensions
+
+
+potential reviewers:
+Axen
+Wernicke
+Abers
+Ekstrom?
+collettini
+
+
+
+Todo:
+- check fault data/refs more
+- get repo shipshape
+- refs
+- bibtex
+- supplementary materials:
+    - fault data tables
+    - sensitivity testing
+    - project notebook
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Refs
-1. a Wernicke summary?
-2. ...
-3. 
-4. Anders and Christie-Blick or something
-5. 
-6. Wernicke 1995
-7. Abers 2000/2001
-8. Jackson et al.. 1987
+~100 normal fault segments in Tibet, not counting lanfs.
