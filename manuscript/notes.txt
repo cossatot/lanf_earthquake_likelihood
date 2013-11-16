@@ -23,8 +23,8 @@ Todo:
     - fault data tables
     - sensitivity testing
     - project notebook
-
-
+put better axis labels on figures
+redo calculations with sevier desert detachment, new DV dip, rates
 
 
 ~100 normal fault segments in Tibet, not counting lanfs.
