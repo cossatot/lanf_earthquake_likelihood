@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-mu = 3e9
+mu = 30e9
 C = 6
 
 def F(M=None, Mmin=2.5, Mc=7.64, B=0.65):
