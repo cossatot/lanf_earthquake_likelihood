@@ -33,7 +33,6 @@ df_ind_tuples = [[i, M] for i in mc_index for M in min_M_list]
 df_multi_ind = pd.MultiIndex.from_tuples(df_ind_tuples, names=['mc_iter','M'])
 
 
-
 # define function to calculate probabilities for each iteration
 # function is defined here so it can access all variables
 def calc_iter_probs(iter):
@@ -41,9 +40,9 @@ def calc_iter_probs(iter):
     df_iter['dip'] = mc_d['dip_samp'][iter]
     df_iter['Ddot'] = mc_d['Ddot_samp'][iter]
 
-    # Generate EQ sample/sequence from F(M) dist.
+    # Generate EQ sample/sequence from F_char(M) dist.
     m_vec = np.linspace(5, mc_d['max_M'][iter], num=1000)
-    fm_vec = eqs.F(m_vec, Mc=Mc)
+    fm_vec = eqs.F_char(m_vec, Mc=Mc, char_M=6.25, char_amplitude_scale=5.25)
     M_samp = eqs.sample_from_pdf(m_vec, fm_vec, n_eq_samp)
     Mo_samp = eqs.calc_Mo_from_M(M_samp)
     
@@ -90,4 +89,4 @@ for fault in list(f.index):
     print 'done with', fault, 'parallel calcs in {} s'.format((time.time()-t0))
     for ii in mc_index:
         fdf.loc[ii][:] = prob_list[ii]
-    fdf.to_csv('../results/{}_all_M.csv'.format(fault))    
+    fdf.to_csv('../results/{}_F_char.csv'.format(fault))    
