@@ -55,7 +55,7 @@ theory as typically applied to the upper crust
 \citep{axen2004lanfmech}, and because observations of active faulting
 on LANFs is sparse and at times ambiguous \citep{wernicke1995seis}. A
 considerable amount of research has been performed to address the
-former concern, reconciling LANF slip with rock mechanics \citep [e.g.]
+former concern, reconciling LANF slip with rock mechanics \citep [e.g.,]
 []{collettini2011lanfmech}. The latter issue, the paucity of definitive LANF
 earthquakes in focal mechanism catalogs, has inhibited hypothesis testing of 
 LANF fault theory, and has also contributed to a mode of thought where the 
@@ -100,7 +100,7 @@ cannot yield unique results.  Several collections of normal fault earthquakes
 with known surface breaks \citep{jackson1987, collettinisibson2001}, thereby
 resolving dip ambiguity, contain no low-angle events, though the collections
 are small ($\le$ 25 events).  Some candidate events exist, but they are
-undersea \citep[e.g.][]{abers2001} or difficult to verify \citep[e.g.]
+undersea \citep[e.g.,][]{abers2001} or difficult to verify \citep[e.g.,]
 []{doser1987ancash}.
 
 
@@ -161,8 +161,7 @@ series we calculate the fraction of unique time windows of length $t$
 in which an earthquake as large or larger than a given magnitude
 occurs.  We take this value as the probability of observing an
 earthquake greater than or equal to moment magnitude \emph{M} over
-time period $t$.%, which we will refer to in the general sense as
-$P(M,t)$.
+time period $t$, which we will refer to in general as $P(M,t)$.
 
 The geometry for each fault is estimated based on the length of the
 fault trace, the dip of the fault, and the estimated seismogenic
@@ -197,7 +196,8 @@ distribution with corner magnitude $M_c = 7.64$ and $\beta = 0.65$
 (from values estimated by \citet{birdkagan2004f_m} for continental
 rifts), or a `characteristic' distribution, as it is not known which
 distribution best represents normal fault seismicity.  The samples are taken 
-from an interval $M = [5.0, \, M_{max}]$, where $M_{max}$ is calculated as the momentmagnitude $M$ resulting from fault slip $D$ = 15 m over a fault of
+from an interval $M = [5.0, \, M_{max}]$, where $M_{max}$ is calculated as the
+moment magnitude $M$ resulting from fault slip $D$ = 15 m over a fault of
 length $L$ cutting through a seismogenic thickness $z$ at dip $\delta$,
 given the relations
 
@@ -219,8 +219,9 @@ These calculations rely on two important assumptions that warrant some
 discussion.  The first is that each earthquake ruptures the entire
 fault patch uniformly.  Though this is highly improbable fault behavior,
 the long-term statistical distribution of earthquake recurrence is 
-insensitive to assumptions about slip distribution in
-individual events: if $n$ different, equal fault patches rupture independently, each requires $n$ times the interseismic strain accumulation time to rupture with
+insensitive to assumptions about slip distribution in individual events:
+if $n$ different, equal fault patches rupture independently, each 
+requires $n$ times the interseismic strain accumulation time to rupture with
 some earthquake of magnitude $M$ versus a single fault rupturing uniformly; 
 but on the whole, magnitude $M$ events would happen with the same long-term
 frequency.  The next assumption is that earthquakes are ordered randomly and
@@ -229,7 +230,8 @@ earthquake to occur.  This means that foreshock and aftershock sequences
 and other types of event clustering are not taken into account.  However,
 the modal inter-event times for earthquakes $\ge M \,6$ or so are greater than
 a hundred years for many LANFs [supplemental figure xx], so the ordering of
-events does not impact the results, as this is longer than our maximum observation window.  Furthermore, any clustering resulting in
+events does not impact the results, as this is longer than our maximum
+observation window.  Furthermore, any clustering resulting in
 event spacing less than the observation window would decrease $P(M,t)$, and
 we are concerned with calculating the maximum $P(M,t)$.
 
@@ -240,12 +242,13 @@ As an example, the results for the Panamint Valley fault are shown in
 Figure~\ref{fig:kongur_all_probs} a and b;
 this fault has the $P(M,t)$ of any of the well-studied LANFs.  The
 probability of observing a $\ge M \, 6.0$ event on Panamint Valley fault 
-is about 0.5 for $t$ = 100 years, and about 0.15 for $t$ = 35 years, which is the length of the Global CMT catalog. 
+is about 0.5 for $t$ = 100 years, and about 0.15 for $t$ = 35 years, which is
+the length of the Global CMT catalog. 
 
 The results for faults with a characteristic frequency-magnitude distribution
 yield much lower $P(M,t)$; this is because the earthquake sequences are 
 dominated by large, infrequent events, so the mean and inter-event times for
-moderate events are several times greater; a similar result was found by
+moderate events are several times greater. A similar result was found by
 \citep{wernicke1995seis} based on a simple calculation, assuming perfectly
 repeating earthquakes.
  
@@ -271,12 +274,21 @@ P_{AT \, or \, LP\, \ldots \, or \, DV} = 1 - (Q_{AT} \cdot Q_{LP} \cdot \ldots 
 \label{ProbUnion}
 \end{equation}
 where $P_{AT}$ is the probability of observing an earthquake on a
-single LANF (the Alto-Tiberina fault), and $Q_{AT} = 1 -
+single LANF (e.g., the Alto-Tiberina fault), and $Q_{AT} = 1 -
 P_{AT}$. Equation (\ref{ProbUnion}) is the union of probabilities for
 non mutually exclusive random events.
 
 The results of this calculation are shown in
-Figure~\ref{fig:kongur_all_probs} b.  Unlike the results from a single
+Figure~\ref{fig:kongur_all_probs} b and c.
+For the Gutenberg-Richter distribution, the likelihood of observing a LANF
+earthquake on \emph{any} fault over the observation period is quite high.
+For example, $P(M,t)$ for $M \, \ge 6$ and $t$ = 35 years is about 0.85.
+This high likelihood suggest that given the model assumptions, we should
+expect to find such an earthquake in the focal mechanism catalogs.
+However, for $M \, \ge 6.5$, the probability is about 0.5,
+
+
+Unlike the results from a single
 fault, the results from all faults show that it is likely that a
 significant earthquake on a LANF would be observed over an observation
 period of even a handful of years.  For example, if we take \emph{M}
@@ -287,23 +299,23 @@ probabilities of X--Y for the 20 LANFs individually.
 
 Here we need a better introduction to the next section.
 
-\subsection{Possible Effect of Inactive Faults}
-
-Of the faults considered here, several have received little to no
-field study, and others have generated conflict in the geologic
-literature over whether they are active.  It is possible that these
-faults spuriously affect the results, raising $P(M,t)$.  To test this,
-we re-run the final calculations, disregarding the Tokorondo and
-Papangeo detachments (as they have received no modern field study and
-do not have clear Quaternary fault scarps in Google Earth imagery),
-and the Kuzey and Guney detachments, as evidence exists that they are
-inactive [e.g., refs, G. Axen, personal communication].  Because
-smaller faults with lower slip rates do not significantly impact the
-results (see Supplementary Materials), we do not leave out other
-poorly-studied or contested faults that have hypothsized low
-moment-accumulation rates. By ignoring the inactive structures, the
-probability of observing a earthquake above M 6.0 drops to X.YX
-(Figure \ref{fig:all_probs_no_maybes}).
+%\subsection{Possible Effect of Inactive Faults}
+%
+%Of the faults considered here, several have received little to no
+%field study, and others have generated conflict in the geologic
+%literature over whether they are active.  It is possible that these
+%faults spuriously affect the results, raising $P(M,t)$.  To test this,
+%we re-run the final calculations, disregarding the Tokorondo and
+%Papangeo detachments (as they have received no modern field study and
+%do not have clear Quaternary fault scarps in Google Earth imagery),
+%and the Kuzey and Guney detachments, as evidence exists that they are
+%inactive [e.g., refs, G. Axen, personal communication].  Because
+%smaller faults with lower slip rates do not significantly impact the
+%results (see Supplementary Materials), we do not leave out other
+%poorly-studied or contested faults that have hypothsized low
+%moment-accumulation rates. By ignoring the inactive structures, the
+%probability of observing a earthquake above M 6.0 drops to X.YX
+%(Figure \ref{fig:all_probs_no_maybes}).
 
 
 
@@ -315,6 +327,7 @@ probability of observing a earthquake above M 6.0 drops to X.YX
 
 
 \section{Discussion}
+Our results are quite sensitive to 
 
 Our compilation of potentially active LANFs shows that they are fairly
 uncommon structures, yet they may still be found in areas of active
@@ -371,7 +384,7 @@ LANF has fault gouge suggestive of creep
 \end{acknowledgements}
 
 % put bib here
-\begin{thebibliography}{23}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
@@ -414,6 +427,13 @@ Bird, P., and Y.~Y. Kagan (2004), Plate-tectonic analysis of shallow
 Buck, W.~R. (1991), Modes of continental lithospheric extension,
   \textit{Journal of Geophysical Research: Solid Earth (1978--2012)},
   \textit{96}(B12), 20,161--20,178.
+
+\bibitem[{\textit{Caskey et~al.}(1996)\textit{Caskey, Wesnousky, Zhang, and
+  Slemmons}}]{caskey1996}
+Caskey, S., S.~Wesnousky, P.~Zhang, and D.~Slemmons (1996), Surface faulting of
+  the 1954 fairview peak (ms 7.2) and dixie valley (ms 6.8) earthquakes,
+  central nevada, \textit{Bulletin of the Seismological Society of America},
+  \textit{86}(3), 761--787.
 
 \bibitem[{\textit{Collettini}(2011)}]{collettini2011lanfmech}
 Collettini, C. (2011), The mechanical paradox of low-angle normal faults:
@@ -465,6 +485,11 @@ Jackson, J. (1987), Active normal faulting and crustal extension,
   \textit{Geological Society, London, Special Publications}, \textit{28}(1),
   3--17.
 
+\bibitem[{\textit{Kagan}(2003)}]{kagan2003pepi}
+Kagan, Y.~Y. (2003), Accuracy of modern global earthquake catalogs,
+  \textit{Physics of the Earth and Planetary Interiors}, \textit{135}(2),
+  173--209.
+
 \bibitem[{\textit{Kapp et~al.}(2005)\textit{Kapp, Harrison, Kapp, Grove,
   Lovera, and Lin}}]{kapp2005nqtl}
 Kapp, J.~L., T.~M. Harrison, P.~Kapp, M.~Grove, O.~M. Lovera, and D.~Lin
@@ -511,7 +536,6 @@ Wernicke, B., and G.~J. Axen (1988), On the role of isostasy in the evolution
   of normal fault systems, \textit{Geology}, \textit{16}(9), 848--851.
 
 \end{thebibliography}
-
 
 
 \end{article}
