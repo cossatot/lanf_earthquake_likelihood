@@ -64,7 +64,7 @@ def calc_iter_probs(iter):
 
     return df_iter
 
-# run for south lunggar trial
+# run for all faults 
 for fault in list(f.index):
     fdf = pd.DataFrame(index=df_multi_ind, columns=mc_cols, dtype='float')
     params = f.loc[fault]
