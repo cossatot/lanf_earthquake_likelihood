@@ -14,7 +14,7 @@ f = pd.read_csv('../data/lanf_stats.csv', index_col=0)
 
 # define some constants and parameters
 n_cores = -4 # number of cores for parallel processing
-n_eq_samp = 5e4
+n_eq_samp = 2.5e4
 time_window = np.hstack( (1, np.arange(5, 105, step=5) ) ) # observation times
 mc_iters = 2e3 # number of Monte Carlo iterations
 mc_index = np.arange(mc_iters, dtype='int')
@@ -33,21 +33,21 @@ rec_int_bins = np.logspace(1, 5)  # bins for recurrence interval statistics
 
 # define function to calculate probabilities for each iteration
 # function is defined here so it can access all variables
-def calc_iter_probs(iter):
-    df_iter = fdf.loc[iter].copy()
-    df_iter['dip'] = mc_d['dip_samp'][iter]
-    df_iter['Ddot'] = mc_d['Ddot_samp'][iter]
+def calc_iter_probs(ii):
+    df_iter = fdf.loc[ii].copy()
+    df_iter['dip'] = mc_d['dip_samp'][ii]
+    df_iter['Ddot'] = mc_d['Ddot_samp'][ii]
 
     # Generate EQ sample/sequence from F(M) dist.
-    m_vec = np.linspace(5, mc_d['max_M'][iter], num=1000)
-    fm_vec = eqs.F_char(m_vec, Mc=Mc, char_M=mc_d['char_M'][iter])
+    m_vec = np.linspace(5, mc_d['max_M'][ii], num=1000)
+    fm_vec = eqs.F_char(m_vec, Mc=Mc, char_M=mc_d['char_M'][ii])
     M_samp = eqs.sample_from_pdf(m_vec, fm_vec, n_eq_samp)
     Mo_samp = eqs.calc_Mo_from_M(M_samp)
     
     # Make time series of earthquakes, including no eq years
     recur_int = eqs.calc_recurrence_interval(Mo=Mo_samp, 
-                                             dip=mc_d['dip_samp'][iter],
-                                             slip_rate=mc_d['Ddot_samp'][iter],
+                                             dip=mc_d['dip_samp'][ii],
+                                             slip_rate=mc_d['Ddot_samp'][ii],
                                              L=params['L_km'],
                                              z=params['z_km'])
 
@@ -61,8 +61,8 @@ def calc_iter_probs(iter):
                       * mc_d['dip_frac'])
         
     # calculate histgrams of recurrence intervals
-    rec_int_counts_df = rec_int_df.loc[iter].copy()
-    for mm in min_M_list:
+    rec_int_counts_df = rec_int_df.loc[ii].copy()
+    for mm in np.array(min_M_list):
         ints = np.diff( np.where(eq_series >= mm) )
         rec_int_counts_df.loc[mm] = np.histogram(ints, bins=rec_int_bins)[0]
         
@@ -107,7 +107,7 @@ for fault in list(f.index):
         fdf.loc[ii][:] = out_list[ii][0]
         rec_int_df.loc[ii][:] = out_list[ii][1]
         
-    fdf.to_csv('../results/{}_char_test.csv'.format(fault))
-    rec_int_df.to_csv('../results/{}_char_rec_ints_test.csv'.format(fault))
+    fdf.to_csv('../results/{}_char.csv'.format(fault))
+    rec_int_df.to_csv('../results/{}_char_rec_ints.csv'.format(fault))
 
 print 'done with all faults in {} s'.format((time.time()-t_init))
