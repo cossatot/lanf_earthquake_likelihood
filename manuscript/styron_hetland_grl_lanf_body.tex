@@ -1,5 +1,5 @@
-\documentclass[draft,grl]{AGUTeX}
-%\documentclass[twocolumn,grl]{AGUTeX}
+%\documentclass[draft,grl]{AGUTeX}
+\documentclass[twocolumn,grl]{AGUTeX}
 \usepackage{mathptmx}
 % \usepackage{lineno}
 % \linenumbers*[1]
@@ -100,7 +100,7 @@ based on each fault's geometry and slip rate, and then we calculate the
 probability of observing earthquakes on each, and any, fault over different
 durations of observation.
 
-\subsection{LANF Slip, Mohr-Coulomb failure theory, and Seismicity}
+\subsection{LANF Slip, Mohr-Coulomb Failure Theory, and Seismicity}
 
 Areas of the crust undergoing active extension are generally assumed
 to have a subvertical maximum compressive stress.  Mohr-Coulomb
@@ -138,6 +138,22 @@ preclude a recent cessation of faulting. In some cases, additional evidence for
 LANF activity comes from geophysical data such as GPS geodesy \citep [e.g.,]
 []{hreinsdottir2009altotib} and seismic waves \citep [e.g.,][]{doser1987ancash}.
 
+\begin{figure*}%[th]
+\noindent\includegraphics[width=40pc]{./figures/active_lanfs_map_insets.pdf}
+\caption{Map of known, potentially active continental LANFs (blue lines), with
+insets showing the physiographic context of the faults.  DXV=Dixie Valley
+fault.  PV=Panamint Valley fault.  DV=Death Valley fault.  CD=Ca\~nada David
+detachment.  SD=Sevier Desert detachment.  CB=Cordillera Blanca detachment.  
+AT=Alto-Tiberina fault.  KZ=Kuzey detachment.  GN=Guney detachment.  
+KS=Kongur Shan fault.  LP=Leo Pargil detachment.  GM=Gurla Mandhata 
+detachment. NLR=North Lunggar detachment.  SLR=South Lunggar detachment.  
+PXN=Pum Qu--Xainza north fault.  PXQ=Pum Qu--Xainza Qingdu fault. 
+NQTL=Nyainqentanglha detachment.  PP=Pompangeo detachment.  
+TK=Tokorondo detachment.  DD=Dayman Dome.  Sources for faults are in the 
+supplementary information}
+\label{fig:lanf_map}
+\end{figure*}
+
 We have compiled all potentially active LANFs with known subareal
 fault traces from a thorough review of the literature, finding twenty
 total (Figure~\ref{fig:lanf_map}).  We have then mapped the approximate fault
@@ -161,23 +177,6 @@ responsible for the 1995 Aigion, Greece earthquake \citep{bernard1997}
 and other potential LANFs underneath the Gulf of Corinth, and the
 fault responsible for the 1952 Ancash, Peru earthquake
 \citep{doser1987ancash}.
-
-
-\begin{figure*}[th]
-\noindent\includegraphics[width=40pc]{./figures/active_lanfs_map_insets.pdf}
-\caption{Map of known, potentially active continental LANFs (blue lines), with
-insets showing the physiographic context of the faults.  DXV=Dixie Valley
-fault.  PV=Panamint Valley fault.  DV=Death Valley fault.  CD=Ca\~nada David
-detachment.  SD=Sevier Desert detachment.  CB=Cordillera Blanca detachment.  
-AT=Alto-Tiberina fault.  KZ=Kuzey detachment.  GN=Guney detachment.  
-KS=Kongur Shan fault.  LP=Leo Pargil detachment.  GM=Gurla Mandhata 
-detachment. NLR=North Lunggar detachment.  SLR=South Lunggar detachment.  
-PXN=Pum Qu--Xainza north fault.  PXQ=Pum Qu--Xainza Qingdu fault. 
-NQTL=Nyainqentanglha detachment.  PP=Pompangeo detachment.  
-TK=Tokorondo detachment.  DD=Dayman Dome.  Sources for faults are in the 
-supplementary information}
-\label{fig:lanf_map}
-\end{figure*}
 
 
 \section{Likelihood of observing a LANF event}
@@ -220,7 +219,7 @@ faults, dip values are sampled from the minimum to 30$^\circ$ and
 the resulting probabilities are then multiplied by the fraction of
 the dip range that is under 30$^\circ$.
 
-\begin{figure}[b!]
+\begin{figure}[b]
 \noindent\includegraphics[width=20pc]{./figures/F-Ms.pdf}
 \caption{Gutenberg-Richter and characteristic frequency-magnitude 
  		 distributions for the South Lunggar detachment}
@@ -246,7 +245,6 @@ given the relations
 \begin{equation}
  M_o = \mu L z D \,/ \, \sin \delta 
  \end{equation}
-
 and
 
 \begin{equation}
@@ -304,8 +302,8 @@ on an single LANF in the moment tensor catalogs. A similar conclusion was
 found by \citet{wernicke1995seis} based on a simple calculation, 
 assuming perfectly repeating large earthquakes on an idealized fault. 
  
-\begin{figure}[bh]
- \noindent\includegraphics[width=20pc]{./figures/pv_probs.pdf}
+\begin{figure}[th]
+ \noindent\includegraphics[width=20pc]{../figures/pv_probs.pdf}
  \caption{\textbf{a:} Probabilities of observing an earthquake greater than or
  equal to a given moment magnitude \emph{M} over a given observation window 
  on the Panamint Valley fault, for the Gutenberg-Richter distribution. 
@@ -348,8 +346,12 @@ expect to find such an earthquake in the focal mechanism catalogs, though
 because many $M6$ events are not surface-breaking \citep{hecker2013eqdist}, it may be difficult to unambiguously tie the quakes to a LANF.
 However, for $M \, \ge 6.5$, the probability is about 0.5. 
 
-The results for the characteristic distribution are lower for smaller events
-and higher for larger events, similar to the 
+The results for the characteristic distribution are lower than the results
+for the GR distribution for smaller events,
+and higher for larger events, similar to the patterns seen in results 
+for individual faults. The $P$
+
+
 
 lower probs for small events
 similar for med events
@@ -379,9 +381,9 @@ showing probability distributions.}
 
 Our compilation of all known potentially active LANFs shows that they 
 are fairly uncommon structures, yet they still may be found in areas 
-currently undergoing extension (almost all major extensional regions are
+currently undergoing extension. Almost all major extensional regions are
 represented; notably, narrow and linear continental rifts, such as 
-the East African and Rio Grande rifts, do not seem to contain active LANFs).
+the East African and Rio Grande rifts, do not seem to contain active LANFs.
 The compilation may serve as a point of comparison for different
 characteristics of active normal faults or LANF geometry, or as a
 reference for any further related study on any of these structures.
