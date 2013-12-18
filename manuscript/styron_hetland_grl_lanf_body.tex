@@ -98,6 +98,10 @@ either Gutenberg-Richter or `characteristic' frequency-magnitude distributions,
 using each fault's geometry and slip rate. We then calculate the
 probability of observing earthquakes on at least one LANF over different
 observation periods.
+Finally, we show how Bayesian probability theory allows one to take
+both the observations of no significant LANF seismicity and the likelihood
+of observing LANF seismicity and adjust one's prior beliefs about LANF
+earthquake likelihood.
 
 \subsection{LANF Slip, Mohr-Coulomb Failure Theory, and Earthquakes}
 
@@ -364,6 +368,36 @@ showing probability distributions.}
 \label{fig:all_probs}
 \end{figure*}
 
+\subsection{Bayesian adjustments of LANF earthquake likelihood}
+If a search through earthquake catalogs for LANF earthquakes is a test of
+whether LANFs are seismically active, our calculations of $ P(M,t)$ quantify
+the accuracy of that test.  Through Bayes' rule, we can incorporate the test
+results and the test accuracy to adjust our beliefs about the likelihood
+of LANF seismic activity.  Here we take $P(A)$ to represent the prior
+probability for LANF seismic activity, and $ P(O)$ is a positive test result
+(identification of a LANF earthquake).  The symbol `$\sim$' indicates
+\emph{not}, so $P(\sim A)$ is the probability of LANF inactivity, 
+equal to $ 1 - P(A)$.  
+The results of this study give the us the likelihood of observing or not
+observing a LANF event given LANF seismic activity, $P(O|A)$ and 
+$P(\sim O | A) = 1 - P(O|A)$, respectively.  $P(O | \sim A)$ is the false
+positive probability.  The posterior $P(A |\sim O)$ is the adjusted
+likelihood of LANF activity given that no LANF events have been observed.
+This result is obtained through a form of Bayes' rule for binary outcomes
+
+\begin{equation}za
+P(A | \sim O) = \frac{P(\sim O|A) P(A)}
+{P(\sim O|A)P(A) + P(\sim O|\sim A)P(\sim A)}
+\label{BayesRule}
+\end{equation}
+
+Equation (\ref{BayesRule}) shows that $P(A|\sim O)$
+depends strongly on the prior belief $P(A)$; this value will vary from
+researcher to researcher, unlike the other, experimentally-derived quantities.
+In Figure (REF), we calculate $P(A|\sim O)$ for $P(A) = [0,1]$, using several
+values for $P(O|A)$ and a likelihood of false positives (an erroneous
+identification of an LANF earthquake) $P(O|~A)= 0.01$.  
+
 \section{Discussion and Conclusions}
 
 Our compilation of all known potentially active LANFs shows that they 
@@ -390,7 +424,7 @@ $P(M\ge6.5, t=35)$ is about 0.5 for either frequency-magnitude distribution.
 This value is a maximum estimate, because we assume that all LANFs in this
 study are seismically active throughout the upper crust at surface dip angles.
 It is quite possible that some of these faults are not tectonically active
-at all ; for example, the area containing the Pompangeo and Tokorondo
+at all. For example, the area containing the Pompangeo and Tokorondo
 detachments has received only reconnaissance mapping
 \citep{parkinson1998sulawesi} and were recognized as detachments by
 \citet{spencer2011} on the basis of map patterns and footwall geomorphology;
@@ -405,23 +439,34 @@ be creeping for much of its down-dip extent
 \citep{hreinsdottir2009altotib}, and the neighboring Zuccale inactive
 LANF has fault gouge suggestive of creep  \citep{collettiniholdsworth2004}.
 
-A maximum value of $P(M\ge6.5,t=35)$ of near 0.5 is not sufficient to
-reject any hypotheses that LANFs are seismically active, on the basis that
-if they are seismically active, then it would be evident.  Instead, these
-results do provide a quantified probabilistic context for interpretations
-of the lack of well-documented continental LANF earthquakes.  For example,
-these probabilities indicate that it cannot be taken for granted that a
-significant earthquake should be observed over a `catalog period' of
-about 40 years. Therefore, results and conclusions of studies
-analyzing the dip distribution of earthquakes on continental normal
-faults \citep{jackson1987, collettinisibson2001} should be interpreted
-in this context.  Similarly, mechanisms such as aseismic creep \citep
-[e.g.,][]{collettini2011lanfmech, hreinsdottir2009altotib}, isostatic
-flexure \citep[e.g.,][] {wernickeaxen1988rolling}, or extremely long
-seismic recurrence intervals \citep{wernicke1995seis} need not be
-invoked to explain the lack of observed seismicity, though these
-mechanisms may indeed be valid or well supported by other
-observations.
+%A maximum value of $P(M\ge6.5,t=35)$ of near 0.5 is not sufficient to
+%reject any hypotheses that LANFs are seismically active, on the basis that
+%if they are seismically active, then it would be evident.  Instead, these
+%results do provide a quantified probabilistic context for interpretations
+%of the lack of well-documented continental LANF earthquakes.  For example,
+%these probabilities indicate that it cannot be taken for granted that a
+%significant earthquake should be observed over a `catalog period' of
+%about 40 years. Therefore, results and conclusions of studies
+%analyzing the dip distribution of earthquakes on continental normal
+%faults \citep{jackson1987, collettinisibson2001} should be interpreted
+%in this context.  Similarly, mechanisms such as aseismic creep \citep
+%[e.g.,][]{collettini2011lanfmech, hreinsdottir2009altotib}, isostatic
+%flexure \citep[e.g.,][] {wernickeaxen1988rolling}, or extremely long
+%seismic recurrence intervals \citep{wernicke1995seis} need not be
+%invoked to explain the lack of observed seismicity, though these
+%mechanisms may indeed be valid or well supported by other
+%observations.
+
+Bayes' rule (Equation \ref{BayesRule}) shows that after searching for LANF 
+earthquakes through catalog searches and finding none, one should decrease
+our belief in LANF seismicity, but her beliefs should not drop to zero.  The
+magnitude of the change depends on the accuracy of the tests. For example,
+with $P(M\ge6.5, t=35) = P(O|A) = 0.5$, the likelihood of LANF seismicity
+is decreased by a maximum of $\sim$0.15 after not observing an earthquake.
+Therefore, given the length of the focal mechanism catalogs and the large
+magnitude of earthquakes necessary to reliably rupture the surface
+(eliminating dip ambiguity in focal mechanisms), one cannot reject hypotheses
+of LANF activity based on earthquakes in the past few decades.
 
 
 \begin{acknowledgements}
