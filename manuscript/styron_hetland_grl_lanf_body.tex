@@ -38,8 +38,11 @@ Low-angle normal faults are well-described in the rock record and may serve
 an important role in crustal extension.  However, seismic slip on these
 shallowly dipping faults  has not been observed, and such slip is often 
 interpreted to be in conflict with standard rock mechanical theory.
-The lack of observed earthquakes with focal mechanisms clearly indicating low-angle normal slip may be an
-indication that they are not seismically active, or it may be due to the fact that thee earthquakes are infrequent compared to the length of focal mechanism catalogs.   
+The lack of observed earthquakes with focal mechanisms clearly 
+indicating low-angle normal slip may be an
+indication that they are not seismically active, or it may be due to the fact
+that these earthquakes are infrequent compared to the length of 
+focal mechanism catalogs.   
 We create a compilation of all potentially-active continental low-angle normal
 faults and calculate the likelihood of observing a significant earthquake on 
 them over time windows from 1 to 100 years. We find 20 candidate faults in
@@ -203,8 +206,8 @@ mapped fault trace perpendicular to the assumed extension direction;
 for faults that change dip significantly along strike (e.g., the Dixie
 Valley fault), we only consider the low-angle segments of the fault.
 Values for the dip are taken from the literature in most cases, and
-measurements of the dip of footwall triangular facets (interpreted as the exhumed
-fault plane) from SRTM data otherwise. In all cases, ranges of fault
+measurements of the dip of footwall triangular facets (interpreted as the 
+exhumed fault plane) from SRTM data otherwise. In all cases, ranges of fault
 geometries are considered, encompassing the degree to which the values are 
 known. The fault locking depth is assumed to be 10 km in the absence of other
 evidence (such as a geodetic study, \citep[e.g.,][]{hreinsdottir2009altotib}).
@@ -214,8 +217,10 @@ literature if possible, or given broad ranges if not documented
 (e.g., 1--10 mm yr$^{-1}$).  In the Monte Carlo simulation, samples
 for slip rate and dip are drawn from uniform distributions defined
 by the maximum and minimum values.  Based on field observations,
-some faults have dip ranges that go above 30$^\circ$, although for these faults dip values are sampled from the minimum to 30$^\circ$, as here we
-only consider slip on faults shallower than 30$^\circ$. The resulting probabilities on these faults are then multiplied by the fraction of
+some faults have dip ranges that go above 30$^\circ$, although for these faults
+dip values are sampled from the minimum to 30$^\circ$, as here we
+only consider slip on faults shallower than 30$^\circ$. The resulting
+probabilities on these faults are then multiplied by the fraction of
 the dip range that is under 30$^\circ$.
 
 \begin{figure}[b]
@@ -240,15 +245,16 @@ from an interval $M = [5.0, \, M_{max}]$, where $M_{max}$ is the
 moment magnitude
 associated with 15 m of slip over the given fault plane. We use the
 standard relations between fault slip, $D$, and moment magnitude, $M$, given by
-  \begin{equation}
- M_o = \mu L z D \,/ \, \sin \delta 
- \end{equation}
-and
-
-
-\begin{equation}
-M = 2/3 \; \log_{10} (M_o) - 6
-\end{equation}
+$M_o = \mu L z D \,/ \, \sin \delta$ and $M = 2/3 \; \log_{10} (M_o) - 6$
+%
+%\begin{equation}
+% M_o = \mu L z D \,/ \, \sin \delta 
+% \end{equation}
+%and
+%
+%\begin{equation}
+%M = 2/3 \; \log_{10} (M_o) - 6
+%\end{equation}
 where $L$ is the fault length, $z$ is the seismogenic thickness, $\delta$ is the fault dip,
 $\mu = 30$ GPa is the shear modulus, and $M_o$ is the seismic
 moment in N m \citep{kagan2003pepi}.  The characteristic distribution has a
@@ -385,18 +391,21 @@ positive probability.  The posterior $P(A |\sim O)$ is the adjusted
 likelihood of LANF activity given that no LANF events have been observed.
 This result is obtained through a form of Bayes' rule for binary outcomes
 
-\begin{equation}za
+\begin{equation}
 P(A | \sim O) = \frac{P(\sim O|A) P(A)}
 {P(\sim O|A)P(A) + P(\sim O|\sim A)P(\sim A)}
 \label{BayesRule}
 \end{equation}
 
-Equation (\ref{BayesRule}) shows that $P(A|\sim O)$
-depends strongly on the prior belief $P(A)$; this value will vary from
+Equation~\ref{BayesRule} shows that $P(A|\sim O)$
+depends strongly on the test accuracy $P(O|A)$ and on the
+prior belief $P(A)$; the latter value will vary from
 researcher to researcher, unlike the other, experimentally-derived quantities.
-In Figure (REF), we calculate $P(A|\sim O)$ for $P(A) = [0,1]$, using several
-values for $P(O|A)$ and a likelihood of false positives (an erroneous
-identification of an LANF earthquake) $P(O|~A)= 0.01$.  
+In Figure~\ref{fig:posteriors}, we calculate $P(A|\sim O)$ for $P(A) = [0,1]$,
+using several values for $P(O|A)$ and a likelihood of false positives 
+(an erroneous identification of an LANF earthquake) $P(O|~A)= 0.01$. However,
+even with a moderately high test accuracy, poster
+
 
 \section{Discussion and Conclusions}
 
@@ -457,7 +466,15 @@ LANF has fault gouge suggestive of creep  \citep{collettiniholdsworth2004}.
 %mechanisms may indeed be valid or well supported by other
 %observations.
 
-Bayes' rule (Equation \ref{BayesRule}) shows that after searching for LANF 
+\begin{figure}[t]
+ \noindent\includegraphics[width=20pc]{./figures/posteriors.pdf}
+ \caption{Prior likelihood for LANF seismicity $P(A)$ and posterior
+ likelihood $P(A|\sim O)$ given no observed earthquakes.  
+ $P(O|A)$ is the likelihood of observing an earthquake given activity
+ on all LANFs.}
+ \label{fig:posteriors}
+\end{figure}
+Bayes' rule (Equation~\ref{BayesRule}) shows that after searching for LANF 
 earthquakes through catalog searches and finding none, one should decrease
 our belief in LANF seismicity, but her beliefs should not drop to zero.  The
 magnitude of the change depends on the accuracy of the tests. For example,
