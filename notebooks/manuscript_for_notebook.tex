@@ -1,5 +1,5 @@
-\documentclass[draft,grl]{AGUTeX}
-%\documentclass[twocolumn,grl]{AGUTeX}
+%\documentclass[draft,grl]{AGUTeX}
+\documentclass[twocolumn,grl]{AGUTeX}
 \usepackage{mathptmx}
 % \usepackage{lineno}
 % \linenumbers*[1]
@@ -42,20 +42,20 @@ often interpreted to be in conflict with standard rock mechanical theory. The
 lack of observed earthquakes with focal mechanisms clearly indicating low-angle
 normal slip may be an indication that they are not seismically active, or it
 may be due to the fact that these earthquakes are infrequent compared to the
-length of focal mechanism catalogs. To address this, we create a compilation of
-all potentially active continental low-angle normal faults and calculate the
+length of focal mechanism catalogs. To address this, we create a compilation of all
+potentially active continental low-angle normal faults and calculate the
 likelihood of observing a significant earthquake on them over time windows from
 1 to 100 years. We find 20 candidate faults in extensional zones worldwide.  We
 find that the probability of observing a significant low-angle normal fault
 earthquake is dependent on several factors including the frequency-magnitude
-distribution. For either a characteristic or Gutenberg-Richter distribution we
-calculate a probability of about 0.5 that an earthquake greater than $M6.5$
-(and therefore likely to have a known fault scarp and dip angle) will be
-observed on any low-angle normal fault in a time window of 35 years, which is
-the length of the Global CMT catalog. We then use Bayes' Theorem to illustrate
-how the absence of observed significant low-angle normal fault seismicity over
-the catalog period moderately decreases the likelihood that the structures
-generate large earthquakes, but does not reduce the likelihood to zero.
+distribution, but for either a characteristic or Gutenberg-Richter distribution
+we calculate a probability of about 0.5 that an earthquake greater than $M6.5$ (and
+therefore likely to have a known fault scarp and dip angle) will be observed on
+any low-angle normal fault in a time window of 35 years, which is the length of
+the Global CMT catalog. We then use Bayes' rule to illustrate how the absence
+of observed significant low-angle normal fault seismicity over the catalog
+period moderately decreases the likelihood that the structures generate
+large earthquakes, but does not reduce the likelihood to zero.
 
 
 \end{abstract}
@@ -102,7 +102,7 @@ assumptions, we create synthetic earthquake catalogs with both
 Gutenberg-Richter and `characteristic' frequency--magnitude distributions,
 using each fault's geometry and slip rate.  We then calculate the probability
 of observing earthquakes on at least one LANF over different observation
-periods. Then, we use Bayes' Theorem to incorporate the negative catalog search
+periods. Then, we use Bayes' rule to incorporate the negative catalog search
 results and the observance likelihood to show how the negative results reduce
 the probability that LANFs are seismically active, but do not bring the final
 probability to zero.
@@ -120,12 +120,12 @@ Therefore, for normal faults with dips less than 30$^\circ$, either much lower
 fault friction or elevated pore fluid pressure is required for fault slip.
 
 Evidence for seismic slip on LANFs is sparse.  This is partly due to the
-ambiguity of the rupture plane in earthquake focal mechanisms, as a focal
-mechanism with a low angle nodal plane will also by definition have a high
-angle nodal plane.  Without ancillary information indicating which nodal plane
-corresponds to the slip surface, searches of earthquake catalogs cannot yield
-unique results as to whether they contain LANF events. Several collections of
-normal fault earthquakes with known surface breaks \citep{jackson1987,
+ambiguity of the rupture plane in earthquake focal mechanisms, and thus a focal
+mechanism with a low angle nodal plane will also have a high angle nodal plane.
+Without ancillary information indicating which nodal plane corresponds to the
+slip surface, searches of earthquake catalogs cannot yield unique results as to
+whether they contain LANF events. Several collections of normal fault
+earthquakes with known surface breaks \citep{jackson1987,
 collettinisibson2001}, thereby resolving dip ambiguity, contain no low-angle
 events, although we note the total number of events in these collections are
 small ($\le$ 25 events).  Some candidate LANF events exist, but they are
@@ -182,9 +182,9 @@ not included because they do not have a clearly-defined, mappable fault trace,
 which is necessary for our earthquake likelihood calculations.  These include
 the 1995 Aigion, Greece earthquake fault \citep{bernard1997} and other
 potential LANFs underneath the Gulf of Corinth, and the 1952 Ancash, Peru
-earthquake fault \citep{doser1987ancash}. Though submarine core complexes with
-superficially low-angle detachments are well-described in the literature and
-some of these structures may have produced recent earthquakes
+earthquake fault \citep{doser1987ancash}. Furthermore, though submarine core
+complexes with superficially low-angle detachments are well-described in the
+literature and some of these structures may have produced recent earthquakes
 \citep{abers2001}, we do not include these in our calculations for several
 reasons: because mid-ocean ridges have not been structurally mapped with the
 completeness or resolution of subareal extensional provinces, it is not
@@ -207,10 +207,10 @@ time windows of length $t$ in which an earthquake as large or larger than
 a given magnitude occurs.  We take this value as the probability of observing
 an earthquake greater than or equal to moment magnitude \emph{M} over time
 period $t$, which we will refer to in general as $P(M,t)$.  All calculations
-are performed with Python, using the Numpy \citep{oliphant2007numpy}, IPython
-\citep{perez2007ipython}, Pandas \citep{mckinney-proc-scipy-2010}, and Joblib
-Parallel \citep{varoquaux_joblib} packages.  All code and data for this project
-is available at https://github.com/cossatot/lanf\_earthquake\_likelihood/.
+are performed with Python, with usage of the Numpy \citep{oliphant2007numpy},
+IPython \citep{perez2007ipython}, Pandas, and Joblib Parallel
+\citep{varoquaux_joblib} packages.  All code and data for this project is
+available at https://github.com/cossatot/lanf\_earthquake\_likelihood/.
 
 The geometry for each fault is estimated based on the length of the fault
 trace, the dip of the fault, and the estimated fault locking depth in the area.
@@ -250,14 +250,13 @@ magnitude $M_c = 7.64$ and $\beta = 0.65$ (from values estimated by
 `characteristic' distribution. It is not certain which distribution more
 appropriately describes seismicity on a single LANF, though studies of many
 individual fault rupture histories suggests that the characteristic
-distribution is more accurate \citep[e.g.,]{hecker2013eqdist}.  The smaller
-number of samples drawn from the characteristic distribution is due to the
-increased computation time associated with a higher proportion of large events,
-leading to much longer time series for a given number of events.  The samples
-are taken from an interval $M = [5.0, \, M_{max}]$, where $M_{max}$ is the
-moment magnitude associated with 15 m of slip over the given fault plane.  We
-use the standard relations between fault slip, $D$, and moment magnitude, $M$,
-given by
+distribution is more accurate \citep{hecker2013eqdist}.  The smaller number of
+samples from the characteristic distribution is due to the increased
+computation time associated with a higher proportion of large events, leading
+to much longer time series for a given number of events.  The samples are taken
+from an interval $M = [5.0, \, M_{max}]$, where $M_{max}$ is the moment
+magnitude associated with 15 m of slip over the given fault plane.  We use the
+standard relations between fault slip, $D$, and moment magnitude, $M$, given by
 
 \begin{equation}
  M_o = \mu L z D \,/ \, \sin \delta 
@@ -270,9 +269,9 @@ M = 2/3 \; \log_{10} (M_o) - 6
 \end{equation}
 where $L$ is the fault length, $z$ is the seismogenic thickness, $\delta$ is
 the fault dip, $\mu = 30$ GPa is the shear modulus, and $M_o$ is the seismic
-moment in N m \citep[e.g.,][]{akirichards2002, kagan2003pepi}.  The
-characteristic distribution has a large-magnitude mode corresponding to $D$
-= 1.5 m on the fault, a typical slip distance for normal fault events
+moment in N m \citep{kagan2003pepi}.  The characteristic distribution has
+a large-magnitude mode corresponding to $D$ = 1.5 m on the fault, a typical
+slip distance for normal fault events
 \citep[e.g.][]{wesnousky2008displacement}.  The distributions are shown in
 Figure~\ref{fig:fms}.
 
@@ -395,52 +394,37 @@ showing probability distributions.  \textbf{d:} Cross-section through
 Because the earthquake focal mechanism catalog is much shorter than the repeat
 time for moderate to large earthquakes on typical normal faults with mm
 yr$^{-1}$ slip rates, catalog searches yielding no results for a particular
-class of events cannot be definitive evidence that they do not occur.
-Nevertheless, the absence of observations does provide some evidence against
-their existence. Through Bayes' Theorem, we can use the probability of
-observing an event (\emph{i.e.}, $P(M,t)$) to calculate the likelihood that
-LANFs are active given the negative outcome of catalog searches. In this
-manner, Bayes' Theorem gives an adjusted, posterior likelihood for a given
-prior likelihood that LANFs are capable of generating large earthquakes.  Here,
-we do not choose a specific prior for LANF seismicity. Different priors may
-result from different evidence or assumptions, and are not likely to be
-constant through time or among all researchers. Instead, we calculate the
-posteriors over the range of prior probabilities from 0 (meaning no probability
-that LANFs are seismically active) to 1 (meaning LANFs are absolutely
-seismically active). Here $P(A)$ represents the prior probability for LANF
-seismic activity, and $P(O)$ is a positive test result (observation of a LANF
-earthquake in a catalog search).  The symbol `$\sim$' indicates \emph{not}, so
-$P(\sim A)$ is the probability that LANFs are inactive;  $ P(\sim A)
-= 1 - P(A)$.  The results of this study gives the us the probability of
-observing or not observing a LANF event given LANF seismic activity, $P(O|A)$
-and $P(\sim O | A) = 1 - P(O|A)$, respectively. $P(O | \sim A)$ is the
-probability of observing a `false positive', the incorrect identification of
-a LANF event, assuming LANFs are not active.  The posterior $P(A |\sim O)$ is
-the likelihood that LANFs can generate large earthquakes given that no LANF
-events have been observed, through a form of Bayes' Theorem
+class of events cannot be definitive evidence that they do not occur, but
+nonetheless do provide some evidence against their existence. Through Bayes'
+rule, we can use the likelihood of observing an event (\emph{i.e.}, our
+calculated $P(M,t)$) to quantitatively interpret the null result in the catalog
+searches. This interpretation does not produce a single probability for LANF
+seismicity, but instead gives an adjusted, posterior likelihood for a given
+prior likelihood that may be based on any ancillary evidence.  In this study,
+we do not set a specific prior for LANF seismicity; different priors may result
+from different evidence or assumptions, and are not likely to be constant
+through time or among all researchers.  Instead, we calculate the posteriors
+over the full range of prior probabilities [0,1]. Here $P(A)$ represents the
+prior probability for LANF seismic activity, and $P(O)$ is a positive test
+result (observation of a LANF earthquake in a catalog search).  The symbol
+`$\sim$' indicates \emph{not}, so $P(\sim A)$ is the probability of LANF
+inactivity, equal to $ 1 - P(A)$.  The results of this study gives the us the
+probability of observing or not observing a LANF event given LANF seismic
+activity, $P(O|A)$ and $P(\sim O | A) = 1 - P(O|A)$, respectively. $P(O | \sim
+A)$ is the probability of observing a `false positive', the incorrect
+identification of a LANF event.  The posterior $P(A |\sim O)$ is the likelihood
+of LANF activity given that no LANF events have been observed.  This result is
+obtained through a form of Bayes' rule for binary outcomes
 
 \begin{equation}
 P(A | \sim O) = \frac{P(\sim O|A) P(A)}
-{P(\sim O|A)P(A) + P(\sim O|\sim A)P(\sim A)} \;.
+{P(\sim O|A)P(A) + P(\sim O|\sim A)P(\sim A)}
 \label{BayesRule}
 \end{equation}
 
-Figure~\ref{fig:posteriors} shows $P(A|\sim O)$ for $P(A) \in [0,1]$, using
-values for $P(O|A)$ of 0.1, 0.5, and 0.8, and a likelihood of false positives
-$P(O|\sim A)= 0.01$. The likelihood of LANF seismicity decreases appreciably
-given a moderate $P(O|A)$, but does not decrease to zero. Low values of $P(O|A)$ 
-yield posteriors that are almost unchanged from the priors; in other words, the
-fact that no LANF events have occurred does not change the prior assumptions,
-if LANF events are not expected to occur.  Additionally, for strong priors with
-values very close to 0 or 1, the posteriors are much closer to the priors; it
-takes much more evidence to change strongly-held positions.
+Figure~\ref{fig:posteriors} shows $P(A|\sim O)$ for $P(A) = [0,1]$,
+using values for $P(O|A)$ of 0.1, 0.5, and 0.8, and a likelihood of false positives $P(O|\sim A)= 0.01$. It is evident in these results that the likelihood of LANF seismicity decreases appreciably given a moderate $P(O|A)$, and decreases significantly given a higher $P(O|A)$, but the values do not decrease to zero.
 
-As an example, we will discuss the case of a prior of 0.5 (meaning that there
-is a 50\% chance that LANFs can generate large earthquakes). If $P(O|A)=0.1$
-and the false-positive rate is 1\%, then the posterior likelihood for LANF
-seismicity is $\approx 0.48$ (Figure~\ref{fig:posteriors}; the catalog searches
-are very non-informative.  If $P(O|A)=0.5$, the posterior drops to $\approx
-0.34$, a moderate reduction.  If $P(O|A)=0.8$, the posterior is $\approx 0.17$.
 
 \section{Discussion and Conclusions}
 
@@ -451,42 +435,40 @@ represented; notably, narrow, linear continental rifts, such as the East
 African and Rio Grande rifts, do not seem to contain active LANFs.  This
 compilation may serve as a point of comparison for different characteristics of
 active normal faults or LANF geometry, or as a reference for any further
-study of these structures.
+related study of these structures.
 
 $P(M\ge6.5, t=35)$ is about 0.5 for either frequency--magnitude distribution,
-and events in this range are likely to be surface--breaking, and which would
-resolve the slip plane ambiguity inherent in earthquake focal mechanisms
-\citep{hecker2013eqdist}; therefore, this value is a good reference value for
-discussion.  This value is a maximum estimate, because we assume that all LANFs
-in this study are seismically active throughout the upper crust at surface dip
-angles.  It is quite possible that some of these faults are not tectonically
-active at all. It is also possible that some or all of these detachments may be
-seismically active but at dip angles $\ge30^\circ$.  For example, the Ca\~nada
-David detachment in Mexico may dip very steeply at seismogenic depths
+and events in this range are likely to be surface- breaking, and therefore have
+unambiguous slip planes, unlike smaller events \citep{hecker2013eqdist};
+therefore, this value is a good reference value for discussion.  This value is
+a maximum estimate, because we assume that all LANFs in this study are
+seismically active throughout the upper crust at surface dip angles.  It is
+quite possible that some of these faults are not tectonically active at all. It
+is also possible that some or all of these detachments may be seismically
+active but at dip angles $\ge30^\circ$.  For example, the Ca\~nada David
+detachment in Mexico may dip very steeply at seismogenic depths
 \citep{fletcherspelz2009}.  Some of these may also be aseismic; the
 Alto-Tiberina fault appears to be creeping for much of its down-dip extent
 \citep{hreinsdottir2009altotib}, and the neighboring Zuccale inactive LANF has
-fault gouge suggestive of creep \citep{collettiniholdsworth2004}. If any
-individual fault is not seismically active at low angles, this reduces the
-total $P(M, t)$ for all events.
+fault gouge suggestive of creep  \citep{collettiniholdsworth2004}.
 
 The likelihood of LANF seismicity for $P(M\ge6.5, t=35) = P(O|A) = 0.5 $ is
-only somewhat decreased after no observations in the focal mechanisms catalogs.
-Although the magnitude of the decrease depends on the prior likelihood, the
-decrease is at most $\sim 15 \%$ (from 0.5 to 0.35). This means that the
-current catalog length is much too short to be used as strong evidence against
-LANF seismicity.  $P(M\ge6.5, t=100)$ is near 0.8 for both GR and
-characteristic distributions; this value more strongly reduces the likelihood
-of LANF seismicity, yet still does not yield a definitive negative conclusion.
-Therefore, results of studies analyzing the dip distribution of earthquakes on
-continental normal faults \citep{jackson1987, collettinisibson2001} should be
-interpreted as informative but not conclusive. Furthermore, alternative
-mechanisms for LANF occurrence or slip such as aseismic creep \citep
-[e.g.,][]{collettini2011lanfmech, hreinsdottir2009altotib}, isostatic flexure
-\citep[e.g.,][] {wernickeaxen1988rolling}, or extremely long seismic recurrence
-intervals \citep{wernicke1995seis} need not be invoked to explain the lack of
-observed seismicity, though these mechanisms may indeed be valid or well
-supported by other observations.
+only somewhat decreased after no observations in the focal mechanisms catalogs;
+although the magnitude of the decrease depends on the prior likelihood, the
+decrease is at most $\sim 15 \%$. This means that the current catalog length is
+much too short to be used as strong evidence against LANF seismicity.
+$P(M\ge6.5, t=100)$ is near 0.8 for both GR and characteristic distributions;
+this value more strongly reduces the likelihood of LANF seismicity, yet still
+does not yield a definitive negative conclusion.  Therefore, results of studies
+analyzing the dip distribution of earthquakes on continental normal faults
+\citep{jackson1987, collettinisibson2001} should be interpreted as informative
+but not conclusive. Furthermore, alternative mechanisms for LANF occurrence or
+slip such as aseismic creep \citep [e.g.,][]{collettini2011lanfmech,
+hreinsdottir2009altotib}, isostatic flexure \citep[e.g.,][]
+{wernickeaxen1988rolling}, or extremely long seismic recurrence intervals
+\citep{wernicke1995seis} need not be invoked to explain the lack of observed
+seismicity, though these mechanisms may indeed be valid or well supported by
+other observations.
 
 
 \begin{figure}%[h]
@@ -507,7 +489,7 @@ supported by other observations.
 \end{acknowledgements}
 
 % put bib here
-\begin{thebibliography}{32}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
@@ -518,10 +500,6 @@ supported by other observations.
 Abers, G.~A. (2001), Evidence for seismogenic normal faults at shallow dips in
   continental rifts, \textit{Geological Society, London, Special Publications},
   \textit{187}(1), 305--318.
-
-\bibitem[{\textit{Aki and Richards}(2002)}]{akirichards2002}
-Aki, K., and P.~G. Richards (2002), \textit{Quantitative seismology: Theory and
-  methods}, University Science Books.
 
 \bibitem[{\textit{Axen}(2004)}]{axen2004lanfmech}
 Axen, G.~J. (2004), Mechanics of low-angle normal faults, in \textit{Rheology
@@ -537,7 +515,7 @@ Axen, G.~J., and J.~M. Bartley (1997), Field tests of rolling hinges:
   Kapp, MacMillan, Ramos-Vel{\'a}zquez, and Aranda-G{\'o}mez}}]{axen1999baja}
 Axen, G.~J., J.~M. Fletcher, E.~Cowgill, M.~Murphy, P.~Kapp, I.~MacMillan,
   E.~Ramos-Vel{\'a}zquez, and J.~Aranda-G{\'o}mez (1999), Range-front fault
-  scarps of the {Sierra El Mayor}, {Baja California}: {F}ormed above an active
+  scarps of the sierra el mayor, baja california: Formed above an active
   low-angle normal fault?, \textit{Geology}, \textit{27}(3), 247--250.
 
 \bibitem[{\textit{Bernard et~al.}(1997)\textit{Bernard, Briole, Meyer,
@@ -576,10 +554,10 @@ Collettini, C., and R.~H. Sibson (2001), Normal faults, normal friction?,
   \textit{Geology}, \textit{29}(10), 927--930.
 
 \bibitem[{\textit{Doser}(1987)}]{doser1987ancash}
-Doser, D.~I. (1987), The {A}ncash, {P}eru, earthquake of 1946 november 10:
-  Evidence for low-angle normal faulting in the high andes of northern peru,
-  \textit{Geophysical Journal of the Royal Astronomical Society},
-  \textit{91}(1), 57--71.
+	Doser, D.~I. (1987), The {A}ncash, {P}eru, earthquake of 1946 {N}ovember
+10: Evidence for low-angle normal faulting in the high {A}ndes of northern
+	{P}eru, \textit{Geophysical Journal of the Royal Astronomical Society},
+	\textit{91}(1), 57--71.
 
 \bibitem[{\textit{Fletcher and Spelz}(2009)}]{fletcherspelz2009}
 Fletcher, J.~M., and R.~M. Spelz (2009), Patterns of {Q}uaternary deformation
@@ -609,7 +587,7 @@ Howard, K.~A., and B.~E. John (1987), Crustal extension along a rooted system
 \bibitem[{\textit{Hreinsd{\'o}ttir and
   Bennett}(2009)}]{hreinsdottir2009altotib}
 Hreinsd{\'o}ttir, S., and R.~A. Bennett (2009), Active aseismic creep on the
-  {Alto Tiberina} low-angle normal fault, {I}taly, \textit{Geology},
+  alto tiberina low-angle normal fault, italy, \textit{Geology},
   \textit{37}(8), 683--686.
 
 \bibitem[{\textit{Jackson}(1987)}]{jackson1987}
@@ -634,11 +612,6 @@ Kapp, J.~L., T.~M. Harrison, P.~Kapp, M.~Grove, O.~M. Lovera, and D.~Lin
 Lister, G., M.~Etheridge, and P.~Symonds (1986), Detachment faulting and the
   evolution of passive continental margins, \textit{Geology}, \textit{14}(3),
   246--250.
-
-\bibitem[{\textit{McKinney}(2010)}]{mckinney-proc-scipy-2010}
-McKinney, W. (2010), Data structures for statistical computing in python, in
-  \textit{Proceedings of the 9th Python in Science Conference}, edited by
-  S.~van~der Walt and J.~Millman, pp. 51 -- 56.
 
 \bibitem[{\textit{Oliphant}(2007)}]{oliphant2007numpy}
 Oliphant, T.~E. (2007), Python for scientific computing, \textit{Computing in
@@ -665,14 +638,14 @@ Styron, R.~H., M.~H. Taylor, K.~E. Sundell, D.~F. Stockli, J.~A. Oalmann,
 \bibitem[{\textit{Sundell et~al.}(2013)\textit{Sundell, Taylor, Styron,
   Stockli, Kapp, Hager, Liu, and Ding}}]{sundell2013lunggar}
 Sundell, K.~E., M.~H. Taylor, R.~H. Styron, D.~F. Stockli, P.~Kapp, C.~Hager,
-  D.~Liu, and L.~Ding (2013), Evidence for constriction and {P}liocene
-  acceleration of east-west extension in the {North Lunggar} rift region of
-  west central {T}ibet, \textit{Tectonics}, \textit{32}(5), 1454--1479,
+D.~Liu, and L.~Ding (2013), Evidence for constriction and {P}liocene
+acceleration of east-west extension in the {N}orth {L}unggar rift region of west
+central {T}ibet, \textit{Tectonics}, \textit{32}(5), 1454--1479,
   \doi{10.1002/tect.20086}.
 
 \bibitem[{\textit{Varoquaux and Grisel}(2009)}]{varoquaux_joblib}
 Varoquaux, G., and O.~Grisel (2009), {J}oblib: {R}unning {P}ython function as
-  pipeline jobs.
+pipeline jobs, http://pythonhosted.org/joblib/.
 
 \bibitem[{\textit{Wernicke}(1995)}]{wernicke1995seis}
 Wernicke, B. (1995), Low-angle normal faults and seismicity: A review,
@@ -706,5 +679,6 @@ Wesnousky, S.~G. (2008), Displacement and geometrical characteristics of
 %\bibliography{styron_hetland_lanf}
 
 \end{document}
+
 
 
