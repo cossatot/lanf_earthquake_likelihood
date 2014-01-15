@@ -1,8 +1,8 @@
 \documentclass[draft,grl]{AGUTeX}
 %\documentclass[twocolumn,grl]{AGUTeX}
 \usepackage{mathptmx}
-% \usepackage{lineno}
-% \linenumbers*[1]
+\usepackage{lineno}
+\linenumbers*[1]
 
 %  To add line numbers to lines with equations:
 %  \begin{linenomath*}
@@ -25,8 +25,9 @@ Michigan, 2534 CC Little Bldg., 1100 N. University Ave.,
 Ann Arbor, MI 48104, USA (richard.h.styron@gmail.com)}
 
 \begin{document}
-\title{Likelihood of observing an earthquake on a continental 
-	   low-angle normal fault}
+\title{Estimated likelihood of observing a large earthquake on a continental 
+	   low-angle normal fault, and implications for low-angle normal fault
+       activity}
 
 \authors{Richard H. Styron \altaffilmark{1}
 and Eric A. Hetland \altaffilmark{1}}
@@ -402,9 +403,9 @@ compilation may serve as a point of comparison for different characteristics of
 active normal faults or LANF geometry, or as a reference for any further
 study of these structures.
 
-Any value for P(M,t) we calculate here is a maximum estimate. As discussed
-above, part of the reason that P(M,t) is the maximum is due to the fact that we
-assume declustered earthquake catalogs. Additionally, P(M,t) is a maximum
+Any value for $P(M,t)$ we calculate here is a maximum estimate. As discussed
+above, part of the reason that $P(M,t)$ is the maximum is due to the fact that we
+assume declustered earthquake catalogs. Additionally, $P(M,t)$ is a maximum
 estimate as we assume that all LANFs in this study are seismically active
 throughout the upper crust at surface dip angles.  It is quite possible that
 some of these faults are not tectonically active at all. It is also possible
@@ -417,7 +418,7 @@ neighboring Zuccale inactive LANF has fault gouge suggestive of creep
 \citep{collettiniholdsworth2004}. If any individual fault is not seismically
 active at low angles, this reduces the total $P(M, t)$ for all events.
 
-P(M \ge  6.5; t = 35) \approx 0.5 for either frequency–magnitude distribution,
+$P(M \ge  6.5, t = 35) \approx 0.5$ for either frequency–magnitude distribution,
 and is a good reference value as events in this range are likely to be
 surface–breaking, and which would resolve the slip plane ambiguity inherent in
 earthquake focal mechanisms \citep{hecker2013eqdist}. Given the fact that no
@@ -644,7 +645,8 @@ Wesnousky, S.~G. (2008), Displacement and geometrical characteristics of
 
 \end{article}
 
-\begin{figure*}%[th]
+%\begin{figure*}%[th]
+\begin{figure}
 \noindent\includegraphics[width=40pc]{./figures/active_lanfs_map_insets.pdf}
 \caption{Map of known, potentially active continental LANFs (blue lines), with
 insets showing the physiographic context of the faults.  DXV=Dixie Valley
@@ -657,7 +659,8 @@ PXN=Pum Qu--Xainza north fault.  PXQ=Pum Qu--Xainza Qingdu fault.
 NQTL=Nyainqentanglha detachment.  PP=Pompangeo detachment.  
 TK=Tokorondo detachment.  DD=Dayman Dome.}
 \label{fig:lanf_map}
-\end{figure*}
+%\end{figure*}
+\end{figure}
 
 
 \begin{figure}[b]
@@ -684,7 +687,8 @@ distributions of $P(M)$.}
 \end{figure}
 
 
-\begin{figure*}
+\begin{figure}
+%\begin{figure*}
 \noindent\includegraphics[width=40pc]{./figures/all_probs_2x2.pdf}
 \caption{\textbf{a:} Probabilities of observing an earthquake greater than or
 equal to a given moment magnitude \emph{M} over a given observation window on
@@ -695,7 +699,8 @@ distribution.  \textbf{c:} Cross-section through \textbf{a} at $t$ = 35 years
 showing probability distributions.  \textbf{d:} Cross-section through
 \textbf{b} at $t$ = 35 years showing probability distributions.}
 \label{fig:all_probs}
-\end{figure*}
+\end{figure}
+%\end{figure*}
 
 
 \begin{figure}
@@ -706,6 +711,8 @@ showing probability distributions.  \textbf{d:} Cross-section through
  on all LANFs.}
 \label{fig:posteriors}
 \end{figure}
+
+%\end{article}
 
 
 \end{document}
