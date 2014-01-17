@@ -4,17 +4,10 @@
 \usepackage{lineno}
 \linenumbers*[1]
 
-%  To add line numbers to lines with equations:
-%  \begin{linenomath*}
-%  \begin{equation}
-%  \end{equation}
-%  \end{linenomath*}
 
-%  Uncomment the following command to include .eps files
-%  (comment out this line for draft format):
 %\usepackage[dvips]{graphicx}
 \usepackage[pdftex]{graphicx}
-%\setkeys{Gin}{draft=false}
+\setkeys{Gin}{draft=false}
 
 \authorrunninghead{STYRON AND HETLAND}
 \titlerunninghead{LANF EARTHQUAKE LIKELIHOOD}
@@ -104,10 +97,10 @@ assumptions, we create synthetic earthquake catalogs with both
 Gutenberg-Richter and `characteristic' frequency--magnitude distributions,
 using each fault's geometry and slip rate.  We then calculate the probability
 of observing earthquakes on at least one LANF over different observation
-periods. Then, we use Bayes' Theorem to incorporate the negative catalog search
-results and the observance likelihood to show how the negative results reduce
-the probability that LANFs are seismically active, but do not bring the final
-probability to zero.
+periods. Finally, we use Bayes' Theorem to incorporate the negative catalog
+search results and the observance likelihood to show how the negative results
+reduce the probability that LANFs are seismically active, but do not bring the
+final probability to zero.
 
 
 \subsection{LANF Slip, Mohr-Coulomb Failure Theory, and Earthquakes}
@@ -230,7 +223,7 @@ magnitude $M_c = 7.64$ and $\beta = 0.65$ (from values estimated by
 `characteristic' distribution. It is not certain which distribution more
 appropriately describes seismicity on a single LANF, though studies of many
 individual fault rupture histories suggests that the characteristic
-distribution is more accurate \citep[e.g.,]{hecker2013eqdist}.  The smaller
+distribution is more accurate \citep[e.g.,][]{hecker2013eqdist}.  The smaller
 number of samples drawn from the characteristic distribution is due to the
 increased computation time associated with a higher proportion of large events,
 leading to much longer time series for a given number of events.  The samples
@@ -281,14 +274,14 @@ the minimum.
 
 The results for faults with a GR frequency-magnitude distribution indicate that
 it is unlikely that any individual fault would have an earthquake greater than
-$M \, 5$ in any modeled observation time up to 100 years.
-As an example, the results for the Panamint Valley fault are shown in
-Figure~\ref{fig:pv}a; this fault has the highest $P(M,t)$ of any of the
-well-studied LANFs.  The probability of observing a $\ge M \, 6.0$ event on the
-Panamint Valley fault is about 0.5 for $t$ = 100 years, and about 0.15 for $t$
-= 35 years, which is the length of the Global CMT catalog. As expected given
-the GR distribution, the $P(M,t)$ is much higher for smaller, more frequent
-events than for larger events.  
+$M \, 5$ in any observation time window up to 100 years.  As an example, the
+results for the Panamint Valley fault are shown in Figure~\ref{fig:pv}a; this
+fault has the highest $P(M,t)$ of any of the well-studied LANFs.  The
+probability of observing a $\ge M \, 6.0$ event on the Panamint Valley fault is
+about 0.5 for $t$ = 100 years, and about 0.15 for $t$ = 35 years, which is the
+current length of the Global CMT catalog. As expected given the GR
+distribution, $P(M,t)$ is much higher for smaller, more frequent events
+than for larger events.  
 
 The results for faults with a characteristic frequency-magnitude distribution
 yield much lower $P(M,t)$ for small to moderate events, but $P(M,t)$ is higher
@@ -335,8 +328,8 @@ For $M \, \ge 6.5$, the probability of observing an LANF earthquake is about
 surface scarps or directivity effects).  The results for the characteristic
 distribution are lower than the results for the GR distribution for smaller
 events and higher for larger events, similar to the patterns seen in results
-for individual faults. $P(M\ge5.5,t)$ through $P(M\ge6.5)$ are all close, about
-0.4--0.5.
+for individual faults. $P(M\ge5.5,t=35)$ through $P(M\ge6.5,t=35)$ are all
+close, about 0.4--0.5.
 
 \subsection{Bayesian adjustments of LANF earthquake likelihood}
 
@@ -356,16 +349,16 @@ a specific prior for LANF activity; rather, we calculate the posteriors over
 the range of prior probabilities from 0 (meaning no probability that LANFs are
 seismically active) to 1 (meaning LANFs are absolutely seismically active).
 Here $P(A)$ represents the prior probability for LANF seismic activity, and
-$P(O)$ is a positive test result (observation of an LANF earthquake in
-a catalog search).  The symbol `$\sim$' indicates \emph{not}, so $P(\sim A)$ is
-the probability that LANFs are inactive;  $ P(\sim A) = 1 - P(A)$.  The results
-of this study give the us the probability of observing or not observing an LANF
-event given LANF seismic activity, $P(O|A)$ and $P(\sim O | A) = 1 - P(O|A)$,
-respectively. $P(O | \sim A)$ is the probability of observing a `false
-positive', the incorrect identification of an LANF event, assuming LANFs are
-not active.  The posterior $P(A |\sim O)$ is the likelihood that LANFs can
-generate large earthquakes given that no LANF events have been observed,
-through a form of Bayes' Theorem
+$P(O)$ is the probability of a positive test result (observation of an LANF
+earthquake in a catalog search).  The symbol `$\sim$' indicates \emph{not}, so
+$P(\sim A)$ is the probability that LANFs are inactive;  $ P(\sim A)
+= 1 - P(A)$.  The results of this study give the us the probability of
+observing or not observing an LANF event given LANF seismic activity, $P(O|A)$
+and $P(\sim O | A) = 1 - P(O|A)$, respectively. $P(O | \sim A)$ is the
+probability of observing a `false positive', the incorrect identification of an
+LANF event, when in fact LANFs are not active.  The posterior $P(A |\sim O)$ is
+the likelihood that LANFs can generate large earthquakes given that no LANF
+events have been observed, through Bayes' Theorem
 
 \begin{equation}
 P(A | \sim O) = \frac{P(\sim O|A) P(A)}
@@ -381,16 +374,17 @@ $P(O|A)$ yield posteriors that are almost unchanged from the priors; in other
 words, the fact that no LANF events have occurred does not change the prior
 assumptions that LANF events are not expected to occur.  Additionally, for
 strong priors with values very close to 0 or 1, the posteriors are much closer
-to the priors; it takes much more evidence to change strongly-held positions.
-For less strongly-held prior assumptions, the posterior probability that the
-LANFs are active is reduced compared to what the prior assumptions are. For
-example, in the case of a prior of 0.5 (meaning that there is a 50\% chance
-that LANFs can generate large earthquakes), then if $P(O|A)=0.1$, then the
-posterior likelihood for LANF seismicity drops to $\approx 0.48$
-(Figure~\ref{fig:posteriors}). In this case, the fact that a catalog search
-results in no identified LANF earthquake is ver non-informative. If
-$P(O|A)=0.5$, the posterior drops to $\approx 0.34$, a moderate reduction.  On
-the other hand, if $P(O|A)=0.8$, the posterior is $\approx 0.17$.
+to the priors, which is to sat that it takes much more evidence to change
+strongly-held positions.  For less strongly-held prior assumptions, the
+posterior probability that the LANFs are active is reduced compared to what the
+prior assumptions are. For example, in the case of a prior of 0.5 (meaning that
+there is a 50\% chance that LANFs can generate large earthquakes), then if
+$P(O|A)=0.1$, then the posterior likelihood for LANF seismicity drops to
+$\approx 0.48$ (Figure~\ref{fig:posteriors}). In this case, the fact that
+a catalog search results in no identified LANF earthquake is 
+non-informative. If $P(O|A)=0.5$, the posterior drops to $\approx 0.34$,
+a moderate reduction.  On the other hand, if $P(O|A)=0.8$, the posterior is
+$\approx 0.17$.
 
 \section{Discussion and Conclusions}
 
@@ -418,14 +412,14 @@ neighboring Zuccale inactive LANF has fault gouge suggestive of creep
 \citep{collettiniholdsworth2004}. If any individual fault is not seismically
 active at low angles, this reduces the total $P(M, t)$ for all events.
 
-$P(M \ge  6.5, t = 35) \approx 0.5$ for either frequency–magnitude distribution,
-and is a good reference value as events in this range are likely to be
-surface–breaking, and which would resolve the slip plane ambiguity inherent in
-earthquake focal mechanisms \citep{hecker2013eqdist}. Given the fact that no
-significant LANF earthquakes have been definitively documented, this
-probability of an LANF earthquake occurring during a 35 year time window
-results in a lowering of a prior assumption that LANFs are active, as long as
-that prior assumption is not a strongly-help position. The magnitude of the
+$P(M \ge  6.5, t = 35) \approx 0.5$ for either frequency-–magnitude
+distribution, and is a good reference value as events in this range are likely
+to be surface–-breaking, and which would resolve the slip plane ambiguity
+inherent in earthquake focal mechanisms \citep{hecker2013eqdist}. Given the
+fact that no significant LANF earthquakes have been definitively documented,
+this probability of an LANF earthquake occurring during a 35 year time window
+results in a lowering of any prior assumption that LANFs are active, as long as
+that prior assumption is not a strongly-held position. The magnitude of the
 decrease depends on the prior likelihood, and the decrease is at most $\sim 15
 \%$ (from 0.5 to 0.35). This means that the current catalog length is much too
 short to be used as strong evidence against LANF seismicity.  $P(M\ge6.5,
@@ -644,7 +638,6 @@ Wesnousky, S.~G. (2008), Displacement and geometrical characteristics of
 
 
 \end{article}
-
 %\begin{figure*}%[th]
 \begin{figure}
 \noindent\includegraphics[width=40pc]{./figures/active_lanfs_map_insets.pdf}
@@ -712,7 +705,6 @@ showing probability distributions.  \textbf{d:} Cross-section through
 \label{fig:posteriors}
 \end{figure}
 
-%\end{article}
 
 
 \end{document}
