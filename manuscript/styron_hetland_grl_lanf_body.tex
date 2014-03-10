@@ -19,7 +19,7 @@ Ann Arbor, MI 48104, USA (richard.h.styron@gmail.com)}
 
 \begin{document}
 \title{Estimated likelihood of observing a large earthquake on a continental 
-	   low-angle normal fault, and implications for low-angle normal fault
+           low-angle normal fault, and implications for low-angle normal fault
        activity}
 
 \authors{Richard H. Styron \altaffilmark{1}
@@ -98,15 +98,16 @@ final probability to zero.
 \subsection{LANF Slip, Mohr-Coulomb Failure Theory, and Earthquakes}
 
 Areas of the crust undergoing active extension are generally assumed to have
-a subvertical maximum compressive stress.  Mohr-Coulomb theory, as applied to
+a subvertical maximum compressive stress. Mohr-Coulomb theory, as applied to
 the crust, predicts that a fault with a typical coefficient of friction for
 rocks (0.6--0.8) should lock up if it is oriented at an angle greater than
-60$^\circ$ to the maximum compressive stress  ({\it i.e.}, fault dips less than
+60$^\circ$ to the maximum compressive stress ({\it i.e.}, fault dips less than
 30$^\circ$), and new, optimally oriented faults should form \citep{sibson1985}.
-Therefore, for normal faults with dips less than 30$^\circ$, either much lower
-fault friction or elevated pore fluid pressure is required for fault slip.
+Therefore, slip on normal faults with dips less than 30$^\circ$ requires much
+lower fault friction, elevated pore fluid pressure, or significant local
+reorientation of the stress field at depth \citep[e.g.,][]{yin89,selverstone12}.
 
-Evidence for seismic slip on LANFs is sparse.  This is partly due to the
+Seismic evidence for slip on LANFs is sparse.  This is partly due to the
 ambiguity of the rupture plane in earthquake focal mechanisms, as a focal
 mechanism with a low angle nodal plane will also by definition have a high
 angle nodal plane.  Without ancillary information indicating which nodal plane
@@ -115,9 +116,12 @@ unique results as to whether they contain LANF events. Several collections of
 normal fault earthquakes with known surface breaks \citep{jackson1987,
 collettinisibson2001}, thereby resolving dip ambiguity, contain no low-angle
 events, although we note the total number of events in these collections are
-small ($\le$ 25 events).  Some candidate LANF events exist, but they are
+small ($\le$ 25 events). Some candidate LANF events exist, but they are
 undersea \citep[e.g.,][]{abers2001} or difficult to verify \citep[e.g.,]
-[]{doser1987ancash}.
+[]{doser1987ancash}. 
+
+Geologic evidence for LANF slip is more plentiful. 
+
 
 
 \section{Potentially Active LANFs}
@@ -141,7 +145,7 @@ into a GIS file (available at https://github.com/cossatot/LANF\_gis), with
 metadata such as slip rate and source. Though the fault traces of many LANFs
 considered here are obscured by vegetation, others display large fault scarps
 in Quaternary sediments, particularly those in Tibet
-\citep[e.g.,][]{styron2013slr, kapp2005nqtl} and the western US
+\citep[e.g.,][]{styron2013slr, kapp2005nqtl} and western North America
 \citep[e.g.,][]{axen1999baja, hayman2003dv}, which are commonly interpreted as
 evidence for past seismic slip.  About half are in Tibet, consistent with
 hypotheses that LANFs and metamorphic core complexes form in areas of hot,
@@ -186,12 +190,17 @@ is available at https://github.com/cossatot/lanf\_earthquake\_likelihood/.
 
 The geometry for each fault is estimated based on the length of the fault
 trace, the dip of the fault, and the estimated fault locking depth in the area.
-The fault is treated as planar for simplicity of calculations, even though the
-exposed footwalls of many detachment faults are nonplanar.  We determine the
+The fault is treated as planar for simplicity of calculations. Even though the
+exposed footwalls of many detachment faults are nonplanar, ample geologic and
+geophysical evidence exists for listric \citep[e.g.][]{morley2009}, antilistric
+\citep[e.g.][]{styron2013slr, fletcherspelz2009}, and planar
+\citep[e.g.][]{mcgrew1993ssrd} detachment geometries at depth; therefore, we
+consider treating the fault planes as planar to be the simplest treatment that
+is unlikely to systematically bias dip estimates at depth. We determine the
 fault length by measuring the approximate length of the mapped fault trace
 perpendicular to the assumed extension direction; for faults that change dip
 significantly along strike, we only consider the low-angle segments of the
-fault.  Values for the dip are taken from the literature in most cases, and
+fault. Values for the dip are taken from the literature in most cases, and
 measurements of the dip of footwall triangular facets (interpreted as the
 exhumed fault plane) from SRTM data otherwise. In all cases, ranges of fault
 geometries are considered, encompassing the degree to which the values are
@@ -295,7 +304,7 @@ of these LANFs during a given time period, we first assume that seismicity on
 each fault is independent and uncorrelated with seismicity on all other faults.
 This assumption is likely true for most faults, but may not be true for the few
 proximal faults, though it is unclear how these faults may interact such that
-an appropriate joint probability may be calculated.  We determine the
+an appropriate joint probability may be calculated. We determine the
 probability for each time window and minimum magnitude with the equation
 \begin{equation}
 P_{AT \, or \, LP\, or\, \ldots \, or \, DV} = 1 - (Q_{AT} \cdot Q_{LP} \cdot \ldots \, \cdot Q_{DV})
@@ -304,7 +313,7 @@ P_{AT \, or \, LP\, or\, \ldots \, or \, DV} = 1 - (Q_{AT} \cdot Q_{LP} \cdot \l
 where $P_{AT}$ is the probability of observing an earthquake on a single LANF
 (e.g., the Alto-Tiberina fault), and $Q_{AT} = 1 - P_{AT}$. Equation
 (\ref{ProbUnion}) is the union of probabilities for non-mutually exclusive
-random events.
+random events. 
 
 The results of this calculation are shown in Figure~\ref{fig:all_probs} a and b.
 For the Gutenberg-Richter distribution, the likelihood of observing an LANF
@@ -389,20 +398,31 @@ compilation may serve as a point of comparison for different characteristics of
 active normal faults or LANF geometry, or as a reference for any further
 study of these structures.
 
-Any value for $P(M,t)$ we calculate here is a maximum estimate. As discussed
-above, part of the reason that $P(M,t)$ is the maximum is due to the fact that we
-assume declustered earthquake catalogs. Additionally, $P(M,t)$ is a maximum
-estimate as we assume that all LANFs in this study are seismically active
-throughout the upper crust at surface dip angles.  It is quite possible that
-some of these faults are not tectonically active at all. It is also possible
-that some or all of these detachments may be seismically active but at dip
-angles $\ge30^\circ$.  For example, the Ca\~nada David detachment in Mexico may
-dip very steeply at seismogenic depths \citep{fletcherspelz2009}.  Some of
-these may also be aseismic; the Alto-Tiberina fault appears to be creeping for
-much of its down-dip extent \citep{hreinsdottir2009altotib}, and the
-neighboring Zuccale inactive LANF has fault gouge suggestive of creep
+We regard our calculated $P(M,t)$ values as maximum estimates given our
+knowledge of existing active LANFs. As discussed above, part of the reason
+that $P(M,t)$ is the maximum is due to the fact that we assume declustered
+earthquake catalogs (clustering on either a single fault or between proximal
+faults will decrease $P(M,t)$). Additionally, $P(M,t)$ is a maximum estimate
+as we assume that all LANFs in this study are seismically active throughout
+the upper crust at surface dip angles.  It is quite possible that some of
+these faults are not tectonically active at all. It is also possible that
+some or all of these detachments may be seismically active but at dip angles
+$\ge30^\circ$.  For example, the Ca\~nada David detachment in Mexico may dip
+very steeply at seismogenic depths \citep{fletcherspelz2009}.  Some of these
+may also be aseismic; the Alto-Tiberina fault appears to be creeping for much
+of its down-dip extent \citep{hreinsdottir2009altotib}, and the neighboring
+Zuccale inactive LANF has fault gouge suggestive of creep
 \citep{collettiniholdsworth2004}. If any individual fault is not seismically
-active at low angles, this reduces the total $P(M, t)$ for all events.
+active at low angles, this reduces the total $P(M, t)$ for all events. On the
+other hand, it is quite unlikely that all candidate LANFs have been
+discovered, and we have not included several known candidates (such as
+submarine detachments \citep [e.g.,][]{abers2001} or basal detachments
+without low-angle surface traces \citep [e.g.,][]{bernard1997}, because of
+the difficulty in quantifying their geometry and slip rates. Therefore, if
+the rate of inclusion of additional LANFs (due to discovery or further
+quantification of geometry and slip rate of poorly-exposed LANFs) is higher
+than the rate of discreditation of LANFs considered here, then $P(M,t)$
+values will increase.
 
 $P(M \ge  6.5, t = 35) \approx 0.5$ for either frequency-–magnitude
 distribution, and is a good reference value as events in this range are likely
@@ -431,9 +451,9 @@ other observations.
 
 
 \begin{acknowledgements}
-  We thank Jon Spencer for a stimulating discussion that became the impetus for
-  this study.  Mike Taylor and Kurt Sundell provided valuable comments on
-  a draft of the manuscript. 
+We thank Jon Spencer for a stimulating discussion that became the impetus for
+this study.  Mike Taylor and Kurt Sundell provided valuable comments on a draft
+of the manuscript. Reviews by Gary Axen and Brian Wernicke were constructive. 
  
 \end{acknowledgements}
 
@@ -651,7 +671,7 @@ TK=Tokorondo detachment.  DD=Dayman Dome.}
 \begin{figure}[b]
 \noindent\includegraphics[width=20pc]{./figures/F-Ms.pdf}
 \caption{Gutenberg-Richter and characteristic frequency-magnitude 
- 		 distributions for the South Lunggar detachment}
+                  distributions for the South Lunggar detachment}
 \label{fig:fms}
 \end{figure}
 
@@ -700,5 +720,6 @@ showing probability distributions.  \textbf{d:} Cross-section through
 
 
 \end{document}
+
 
 
