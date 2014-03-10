@@ -202,8 +202,8 @@ def calc_Mo_from_fault_params(L=None, z=None, dip=None, mu=mu, D=None,
     change.  It is defined elsewhere so that all functions use the same value.
     """
     if area_dim == 'km':
-        L *= 1000
-        z *= 1000
+        L = L * 1000
+        z = z * 1000
 
     if dip_dim == 'degrees':
         dip = np.radians(dip)
@@ -228,11 +228,11 @@ def calc_recurrence_interval(Mo=None, dip=None, mu=mu, L=None, z=None,
     """
 
     if area_dim == 'km':
-        L *= 1000
-        z *= 1000
+        L = L * 1000
+        z = z * 1000
 
     if slip_rate_dim in ('mm/yr', 'mm/a'):
-        slip_rate *= 0.001
+        slip_rate = slip_rate * 0.001
 
     if dip_dim == 'degrees':
         dip = np.radians(dip)
